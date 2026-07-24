@@ -66,7 +66,9 @@ Look at `config/config.sample.yaml` for a real filled-in example.
 
 ### 3. Set up your todo backend
 Pick one and follow its doc:
-- **Apple Reminders** → `docs/reminders-setup.md` (lists, tags, Kanban sections)
+- **Apple Reminders** → `docs/reminders-setup.md` (lists, tags, Kanban sections) +
+  [`reminders-mcp-server`](https://github.com/amoizp/reminders-mcp-server)
+  for Claude to read/write directly (macOS only, local execution)
 - **Custom Yjs/CRDT app** → see the companion repo (link it here once built)
 - **Third-party app (Todoist/Asana/etc.)** → connect it via Claude's connector
   directory; no extra setup needed in this repo
