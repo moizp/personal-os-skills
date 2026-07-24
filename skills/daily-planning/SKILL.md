@@ -40,7 +40,12 @@ scheduled task fires at `review_cadence.daily_planning_time`.
 5. **If `atomic_habits` enabled**: include the day's recurring habit-todos
    automatically, don't make the user re-add them.
 
-6. **Update the todo backend** (add/move items per `todo_backend.type` —
+6. **If `lean` enabled**: give exploratory or uncertain items an explicit
+   timebox (a fixed small duration, not "however long it takes"). If an
+   item is an active experiment (see `lean-experiment` skill), confirm its
+   timebox deadline and surface it if today is the deadline.
+
+7. **Update the todo backend** (add/move items per `todo_backend.type` —
    e.g. set due date = today in Reminders) so the change is reflected
    where the user actually sees it, not just described in chat.
 

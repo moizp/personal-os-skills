@@ -51,10 +51,17 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
 7. **If `culture_code` enabled** (team context): include a lightweight
    "what got in the way" prompt, not just individual task status.
 
-8. **Stage next week.** Move/tag items from This Month → This Week based
+8. **If `lean` enabled**: for any timeboxed experiments (todos tagged/
+   titled as experiments, e.g. "[EXP] ...") due this week, record what was
+   *learned* — assumption held, broken, or inconclusive — not just
+   done/not-done. A clearly-failed assumption is a useful outcome; don't
+   treat it as a missed task. Flag any experiment that ran past its
+   timebox without a recorded outcome.
+
+9. **Stage next week.** Move/tag items from This Month → This Week based
    on capacity and priority. Keep This Week realistic, not aspirational.
 
-9. **Sync Kanban boards**: for any project list using Kanban sections, make
+10. **Sync Kanban boards**: for any project list using Kanban sections, make
    sure due dates match section (per `todo_backend.reminders.kanban_sections`)
    — a card in "This Week" should have a due date this week.
 

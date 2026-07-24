@@ -10,6 +10,7 @@ frameworks:
   - seven_habits
   - atomic_habits
   - gtd
+  - lean
 
 goals:
   horizons: [3, 6, 9, 12]

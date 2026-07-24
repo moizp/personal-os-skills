@@ -46,11 +46,17 @@ e.g. "let's plan next quarter," "set Q3 goals," "revise my 6-month goals."
 5. **If `gtd` is enabled**: confirm each project goal has at least one
    concrete next action, not just an outcome statement.
 
-6. **Update the artifact** (`goals.artifact_name`) with the revised goal
+6. **If `lean` is enabled**: for each project goal, identify the riskiest
+   unvalidated assumption it depends on. If there is one worth testing
+   before full commitment, invoke the `lean-experiment` skill to design a
+   timeboxed test rather than committing the full quarter's plan on an
+   unverified premise.
+
+7. **Update the artifact** (`goals.artifact_name`) with the revised goal
    set. Keep the previous horizon's actuals visible for reference, don't
    overwrite history.
 
-7. **Do not silently drop unmet goals.** Ask the user explicitly whether a
+8. **Do not silently drop unmet goals.** Ask the user explicitly whether a
    carried-over goal should continue, be redefined, or be moved to
    Someday/Maybe.
 

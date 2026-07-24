@@ -3,14 +3,16 @@
 A generic, reusable system for turning long-term goals into weekly and daily
 execution, built on Claude Projects, Skills, and Cowork.
 
-It combines four frameworks:
+It combines five frameworks:
 - **Seven Habits** (Stephen Covey) — roles, big rocks, proactive prioritization
 - **Atomic Habits** (James Clear) — identity-based habits, habit stacking
 - **Culture Code** (Daniel Coyle) — psychological safety, belonging cues (most
   relevant if you're applying this to a team, not just yourself)
 - **Getting Things Done** (David Allen) — capture, clarify, organize, reflect, engage
+- **Lean** (Lean Startup / Lean Thinking) — timeboxing, testing the
+  riskiest assumption before full commitment, small batch sizes
 
-You don't need to use all four. Pick what fits in your `config/config.yaml`
+You don't need to use all five. Pick what fits in your `config/config.yaml`
 (see below).
 
 ---
@@ -24,11 +26,13 @@ personal-os-skills/
 │   ├── seven-habits.md
 │   ├── atomic-habits.md
 │   ├── culture-code.md
-│   └── gtd.md
+│   ├── gtd.md
+│   └── lean.md
 ├── skills/                    ← the actual Claude Skills (procedures)
 │   ├── quarterly-goal-setting/SKILL.md
 │   ├── weekly-review/SKILL.md
-│   └── daily-planning/SKILL.md
+│   ├── daily-planning/SKILL.md
+│   └── lean-experiment/SKILL.md
 ├── config/
 │   ├── config.example.yaml    ← template — copy this
 │   └── config.sample.yaml     ← a filled-in real example (see docs/sample-config-notes.md)

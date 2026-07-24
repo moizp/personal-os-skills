@@ -11,6 +11,7 @@ frameworks:
   - seven_habits
   - atomic_habits
   - gtd
+  - lean
   # - culture_code            # uncomment if applying this to a team, not just yourself
 
 goals:
