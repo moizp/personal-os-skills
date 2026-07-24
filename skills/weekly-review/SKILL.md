@@ -16,22 +16,28 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
 
 ## Inputs to read first
 1. `config/config.yaml` → `todo_backend`, `review_cadence`, `frameworks`
-2. Current state of the todo backend's lists (Inbox, This Week, This
-   Month, Maybe, and any active project Kanban boards) — actually query
-   it, don't assume.
-3. The quarterly goals artifact, for alignment checking.
+2. Current Inbox and Maybe list contents, and any active project Kanban
+   boards — actually query them, don't assume.
+3. **`get_due_todos(horizon: this_week, includeCompleted: true)`** — this
+   is "This Week," not a named list (Smart Lists aren't scriptable; see
+   `docs/reminders-setup.md`). `includeCompleted: true` here specifically,
+   so completions can be reviewed against what was planned.
+4. **`get_due_todos(horizon: this_month)`** — candidates to stage into
+   next week.
+5. The quarterly goals artifact, for alignment checking.
 
 ## Procedure
 
-1. **Inbox triage** (if `gtd` enabled). Read `todo_backend.reminders.lists.inbox`
-   (or equivalent for other backends). For every item: move it to a
-   project list, move it to a time-horizon list (This Week/This
-   Month/etc.), move it to Maybe, or flag it for deletion — nothing should
-   survive this step still sitting in Inbox. If it takes under two
-   minutes, note that it could just be done now rather than filed.
+1. **Inbox triage** (if `gtd` enabled). Read the real Inbox list. For
+   every item: move it to a project list, give it a due date (this makes
+   it show up in future `get_due_todos` horizon queries — no list move
+   needed), move it to Maybe, or flag it for deletion — nothing should
+   survive this step still sitting in Inbox untouched. If it takes under
+   two minutes, note it could just be done now rather than filed.
 
-2. **Review completions.** What got done this week vs. what was planned.
-   No judgment tone — just facts, this is data for planning, not a
+2. **Review completions.** Compare `get_due_todos(horizon: this_week,
+   includeCompleted: true)` against what was actually completed. No
+   judgment tone — just facts, this is data for planning, not a
    performance review.
 
 3. **Someday/Maybe MUST be touched this step.** Per GTD, this list rots if
@@ -39,9 +45,9 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
    ready to activate, or still parked?" Don't skip this even if the list
    looks unchanged from last week.
 
-4. **Check alignment with quarterly goals.** Flag anything in This
-   Week/This Month that doesn't trace back to a current quarterly goal —
-   ask if it should be added intentionally or dropped.
+4. **Check alignment with quarterly goals.** Flag anything due this
+   week/month that doesn't trace back to a current quarterly goal — ask
+   if it should be added intentionally or dropped.
 
 5. **If `seven_habits` enabled**: check role balance — were any roles
    completely absent from this week's actual activity?
@@ -61,17 +67,20 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
    treat it as a missed task. Flag any experiment that ran past its
    timebox without a recorded outcome.
 
-9. **Stage next week.** Move/tag items from This Month → This Week based
-   on capacity and priority. Keep This Week realistic, not aspirational.
+9. **Stage next week.** From `get_due_todos(horizon: this_month)` and
+   project Backlog/Next columns, pick what's realistic for next week and
+   set/update due dates accordingly via `update_due_date` — this is what
+   "staging" means now, since there's no This Week list to move items
+   into. Keep it realistic, not aspirational.
 
 10. **Check Kanban boards for missing due dates**: for any project list
-   using Kanban sections, flag "Doing" items with no due date set at all —
-   those are invisible to the Today/This Week Smart Lists. Don't force the
-   due date to match the column name; the column is workflow status, the
-   due date is the actual deadline, and they're independent (see
-   `docs/reminders-setup.md`).
+    using Kanban sections, flag "Doing" items with no due date set at
+    all — those are invisible to `get_due_todos`. Don't force the due
+    date to match the column name; the column is workflow status, the
+    due date is the actual deadline, and they're independent (see
+    `docs/reminders-setup.md`).
 
 ## Output
 A short summary: what got done, what's flagged in Someday/Maybe, what's
-staged for next week, and any role/habit/goal misalignment worth the
-user's attention.
+staged for next week (with due dates), and any role/habit/goal
+misalignment worth the user's attention.
