@@ -14,8 +14,9 @@ scheduled task fires at `review_cadence.daily_planning_time`.
 
 ## Inputs to read first
 1. `config/config.yaml` → `todo_backend`, `review_cadence`
-2. Current contents of the This Week list/board and the existing Today
-   list (don't assume it's empty — check for carryover first).
+2. Current contents of the This Week list/board, the Inbox, and the
+   existing Today list (don't assume it's empty — check for carryover
+   first).
 
 ## Procedure
 
@@ -27,25 +28,30 @@ scheduled task fires at `review_cadence.daily_planning_time`.
    whether it's still relevant, should move to today's fresh list, or
    should go back to This Week/Maybe.
 
-3. **Keep Today small.** This is the most common failure mode across
+3. **Quick Inbox skim** (if `gtd` enabled). Not a full triage — that's
+   weekly review's job. Just check whether anything in Inbox is urgent
+   enough to need action today; leave the rest for the weekly pass rather
+   than doing full triage here.
+
+4. **Keep Today small.** This is the most common failure mode across
    real-world GTD/Reminders setups — Today becomes a dumping ground and
    loses meaning. Cap it to what's realistically doable; if there's more
    candidate work than fits, leave the rest in This Week rather than
    padding Today.
 
-4. **If `seven_habits` enabled**: make sure at least one "big rock"
+5. **If `seven_habits` enabled**: make sure at least one "big rock"
    (important-not-urgent, tied to a role/quarterly goal) is on the list,
    not just reactive small items.
 
-5. **If `atomic_habits` enabled**: include the day's recurring habit-todos
+6. **If `atomic_habits` enabled**: include the day's recurring habit-todos
    automatically, don't make the user re-add them.
 
-6. **If `lean` enabled**: give exploratory or uncertain items an explicit
+7. **If `lean` enabled**: give exploratory or uncertain items an explicit
    timebox (a fixed small duration, not "however long it takes"). If an
    item is an active experiment (see `lean-experiment` skill), confirm its
    timebox deadline and surface it if today is the deadline.
 
-7. **Update the todo backend** (add/move items per `todo_backend.type` —
+8. **Update the todo backend** (add/move items per `todo_backend.type` —
    e.g. set due date = today in Reminders) so the change is reflected
    where the user actually sees it, not just described in chat.
 

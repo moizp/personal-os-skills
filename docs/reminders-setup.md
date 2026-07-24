@@ -3,11 +3,27 @@
 ## Lists (time-horizon lists)
 Create these as standard Reminders lists (names configurable in
 `config/config.yaml` under `todo_backend.reminders.lists`):
+- Inbox — capture only; not a time-horizon, just a landing zone for
+  anything new until it's triaged (see below)
 - Today
 - This Week
 - This Month
 - This Quarter
 - Maybe/Later
+
+## Inbox triage
+Add anything new to Inbox the moment it comes up — no thinking required
+at capture time, that's the point. Inbox items get cleared during daily
+planning (a quick skim) and fully during weekly review (nothing should
+survive a week untriaged). Triaging means one of:
+- Move to a project list (it belongs to an active goal)
+- Move to a time-horizon list (Today/This Week/This Month/This Quarter —
+  it's a real near-term action)
+- Move to Maybe (not now, but worth keeping)
+- Delete (wasn't actually worth keeping)
+- Do it immediately if it takes under two minutes, then delete it (GTD's
+  two-minute rule) rather than filing it anywhere
+
 
 ## Project lists (per active goal)
 For each quarterly goal that requires multiple actions:

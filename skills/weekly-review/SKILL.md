@@ -16,16 +16,19 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
 
 ## Inputs to read first
 1. `config/config.yaml` → `todo_backend`, `review_cadence`, `frameworks`
-2. Current state of the todo backend's lists (This Week, This Month,
-   Maybe, and any active project Kanban boards) — actually query it, don't
-   assume.
+2. Current state of the todo backend's lists (Inbox, This Week, This
+   Month, Maybe, and any active project Kanban boards) — actually query
+   it, don't assume.
 3. The quarterly goals artifact, for alignment checking.
 
 ## Procedure
 
-1. **Inbox/capture check** (if `gtd` enabled). Anything sitting
-   uncategorized needs to be clarified: actionable now, a project, or
-   Someday/Maybe.
+1. **Inbox triage** (if `gtd` enabled). Read `todo_backend.reminders.lists.inbox`
+   (or equivalent for other backends). For every item: move it to a
+   project list, move it to a time-horizon list (This Week/This
+   Month/etc.), move it to Maybe, or flag it for deletion — nothing should
+   survive this step still sitting in Inbox. If it takes under two
+   minutes, note that it could just be done now rather than filed.
 
 2. **Review completions.** What got done this week vs. what was planned.
    No judgment tone — just facts, this is data for planning, not a
