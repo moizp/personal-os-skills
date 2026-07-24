@@ -1,6 +1,13 @@
 # Apple Reminders Setup
 
 ## Lists (time-horizon lists)
+**Important: do not put any of these lists inside a List Group** (Personal/
+Work/Uncategorised-style folders). Groups are invisible to AppleScript/JXA
+— a list inside a Group can't be read or written by
+`reminders-mcp-server` at all, confirmed empirically. Keep every list
+below at the top level. If you want visual organization in the Reminders
+sidebar, use a naming prefix (e.g. "Work — Launch X") instead of a Group.
+
 Create these as standard Reminders lists (names configurable in
 `config/config.yaml` under `todo_backend.reminders.lists`):
 - Inbox — capture only; not a time-horizon, just a landing zone for
@@ -27,7 +34,8 @@ survive a week untriaged). Triaging means one of:
 
 ## Project lists (per active goal)
 For each quarterly goal that requires multiple actions:
-1. Create a new list named for the project/goal.
+1. Create a new list named for the project/goal — **also at the top
+   level, not inside a Group** (same constraint as above).
 2. Right-click → New Section, and add sections matching
    `todo_backend.reminders.kanban_sections` in config (default:
    Backlog, Next, Doing, Done, Archived — deliberately different names
