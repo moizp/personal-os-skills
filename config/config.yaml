@@ -24,11 +24,10 @@ todo_backend:
   type: "reminders"            # one of: reminders | yjs | connector
   # --- reminders-specific ---
   reminders:
+    # Only REAL Reminders lists go here — Today/This Week/etc. are Smart
+    # Lists, not scriptable. Time horizons are computed by get_due_todos.
     lists:
-      today: "Today"
-      this_week: "This Week"
-      this_month: "This Month"
-      this_quarter: "This Quarter"
+      inbox: "Inbox"
       maybe_later: "Maybe/Later"
     # project lists are created ad hoc, one per active project/goal,
     # with Kanban sections — see docs/reminders-setup.md
