@@ -1,0 +1,54 @@
+# Personal OS config template
+# Copy this to config.yaml and fill in your own values.
+# Skills read this file at runtime — do not hardcode personal details in skills/.
+
+user:
+  name: ""                     # e.g. "Alex"
+  timezone: ""                 # e.g. "America/New_York"
+
+frameworks:
+  # Comment out any you don't use. Order = priority when frameworks conflict.
+  - seven_habits
+  - atomic_habits
+  - gtd
+  # - culture_code            # uncomment if applying this to a team, not just yourself
+
+goals:
+  horizons: [3, 6, 9, 12]      # months
+  artifact_name: "quarterly-goals"   # name of the Claude artifact / tracker
+  # If goals should map to Covey "roles," list them here (optional)
+  roles: []                    # e.g. ["Parent", "Engineer", "Health", "Community"]
+
+todo_backend:
+  type: "reminders"            # one of: reminders | yjs | connector
+  # --- reminders-specific ---
+  reminders:
+    lists:
+      today: "Today"
+      this_week: "This Week"
+      this_month: "This Month"
+      this_quarter: "This Quarter"
+      maybe: "Maybe"
+    # project lists are created ad hoc, one per active project/goal,
+    # with Kanban sections — see docs/reminders-setup.md
+    kanban_sections: ["Backlog", "This Week", "Today", "Done"]
+    tag_prefix: "#goal-"       # tags used to link tasks back to a quarterly goal
+  # --- yjs-specific (if todo_backend.type == yjs) ---
+  yjs:
+    relay_url: ""
+    default_room: ""           # your personal room ID
+  # --- connector-specific (if todo_backend.type == connector) ---
+  connector:
+    name: ""                   # e.g. "todoist"
+
+review_cadence:
+  daily_planning_time: "07:30"
+  weekly_review_day: "sunday"
+  weekly_review_time: "17:00"
+  quarterly_review: "last week of each quarter"
+
+notes:
+  # Free text — anything a skill should always know about how you work.
+  # Keep this short; long personal context belongs in your Claude Project,
+  # not in this repo.
+  ""

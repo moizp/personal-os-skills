@@ -1,0 +1,51 @@
+# SAMPLE config — a real filled-in example, based on the conversation that
+# produced this repo. Copy config.example.yaml instead of this file when
+# setting up your own — this one is here purely as a worked example.
+
+user:
+  name: "Sample User"
+  timezone: "America/Los_Angeles"
+
+frameworks:
+  - seven_habits
+  - atomic_habits
+  - gtd
+
+goals:
+  horizons: [3, 6, 9, 12]
+  artifact_name: "quarterly-goals"
+  roles:
+    - "Health"
+    - "Career"
+    - "Family"
+    - "Personal Growth"
+
+todo_backend:
+  type: "reminders"
+  reminders:
+    lists:
+      today: "Today"
+      this_week: "This Week"
+      this_month: "This Month"
+      this_quarter: "This Quarter"
+      maybe: "Maybe"
+    kanban_sections: ["Backlog", "This Week", "Today", "Done"]
+    tag_prefix: "#goal-"
+  yjs:
+    relay_url: ""
+    default_room: ""
+  connector:
+    name: ""
+
+review_cadence:
+  daily_planning_time: "07:30"
+  weekly_review_day: "sunday"
+  weekly_review_time: "17:00"
+  quarterly_review: "last week of each quarter"
+
+notes: >
+  Project boards in Reminders are per-goal, not per-list — each active
+  quarterly goal that needs multi-step tracking gets its own Reminders list
+  with Kanban sections. Due dates drive which Smart List (Today/This Week)
+  a task shows up in; moving a Kanban card should update the due date to
+  match.
