@@ -61,9 +61,12 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
 9. **Stage next week.** Move/tag items from This Month → This Week based
    on capacity and priority. Keep This Week realistic, not aspirational.
 
-10. **Sync Kanban boards**: for any project list using Kanban sections, make
-   sure due dates match section (per `todo_backend.reminders.kanban_sections`)
-   — a card in "This Week" should have a due date this week.
+10. **Check Kanban boards for missing due dates**: for any project list
+   using Kanban sections, flag "Doing" items with no due date set at all —
+   those are invisible to the Today/This Week Smart Lists. Don't force the
+   due date to match the column name; the column is workflow status, the
+   due date is the actual deadline, and they're independent (see
+   `docs/reminders-setup.md`).
 
 ## Output
 A short summary: what got done, what's flagged in Someday/Maybe, what's

@@ -3,8 +3,8 @@
 # Skills read this file at runtime — do not hardcode personal details in skills/.
 
 user:
-  name: ""                     # e.g. "Alex"
-  timezone: ""                 # e.g. "America/New_York"
+  name: "Moiz"
+  timezone: "New Zealand"
 
 frameworks:
   # Comment out any you don't use. Order = priority when frameworks conflict.
@@ -18,7 +18,7 @@ goals:
   horizons: [3, 6, 9, 12]      # months
   artifact_name: "quarterly-goals"   # name of the Claude artifact / tracker
   # If goals should map to Covey "roles," list them here (optional)
-  roles: []                    # e.g. ["Parent", "Engineer", "Health", "Community"]
+  roles: ["Colleague", "Leader", "Parent", "Community Member"]
 
 todo_backend:
   type: "reminders"            # one of: reminders | yjs | connector
@@ -31,14 +31,8 @@ todo_backend:
       this_quarter: "This Quarter"
       maybe_later: "Maybe/Later"
     # project lists are created ad hoc, one per active project/goal,
-    # with Kanban sections — see docs/reminders-setup.md.
-    # NOTE: reminders-mcp-server cannot read/write sections (AppleScript
-    # limitation) — this list is for the one-time manual setup only, not
-    # something a skill can pass to add_todo.
+    # with Kanban sections — see docs/reminders-setup.md
     kanban_sections: ["Backlog", "Next", "Doing", "Done", "Archived"]
-    # NOTE: reminders-mcp-server does not currently support tags — no tool
-    # can read or set them. This field is aspirational until tag support
-    # is added to the server; don't rely on it in skills yet.
     tag_prefix: "#goal-"       # tags used to link tasks back to a quarterly goal
   # --- yjs-specific (if todo_backend.type == yjs) ---
   yjs:
@@ -51,7 +45,7 @@ todo_backend:
 review_cadence:
   daily_planning_time: "07:30"
   weekly_review_day: "sunday"
-  weekly_review_time: "17:00"
+  weekly_review_time: "19:00"
   quarterly_review: "last week of each quarter"
 
 notes:

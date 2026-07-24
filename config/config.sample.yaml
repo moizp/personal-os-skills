@@ -29,8 +29,8 @@ todo_backend:
       this_week: "This Week"
       this_month: "This Month"
       this_quarter: "This Quarter"
-      maybe: "Maybe"
-    kanban_sections: ["Backlog", "This Week", "Today", "Done"]
+      maybe_later: "Maybe/Later"
+    kanban_sections: ["Backlog", "Next", "Doing", "Done", "Archived"]
     tag_prefix: "#goal-"
   yjs:
     relay_url: ""
