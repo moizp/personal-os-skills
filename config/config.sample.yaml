@@ -25,10 +25,7 @@ todo_backend:
   type: "reminders"
   reminders:
     lists:
-      today: "Today"
-      this_week: "This Week"
-      this_month: "This Month"
-      this_quarter: "This Quarter"
+      inbox: "Inbox"
       maybe_later: "Maybe/Later"
     kanban_sections: ["Backlog", "Next", "Doing", "Done", "Archived"]
     tag_prefix: "#goal-"

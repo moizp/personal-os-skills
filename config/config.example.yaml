@@ -24,12 +24,19 @@ todo_backend:
   type: "reminders"            # one of: reminders | yjs | connector
   # --- reminders-specific ---
   reminders:
+    # Only REAL Reminders lists go here. "Today"/"This Week"/"This
+    # Month"/"This Quarter" are NOT real lists — they're Smart Lists
+    # (computed views) and aren't readable/writable via AppleScript/JXA.
+    # Time horizons are computed instead, via the get_due_todos tool
+    # (horizon: today | this_week | this_month | this_quarter) — see
+    # docs/reminders-setup.md.
     lists:
-      today: "Today"
-      this_week: "This Week"
-      this_month: "This Month"
-      this_quarter: "This Quarter"
+      inbox: "Inbox"
       maybe_later: "Maybe/Later"
+    # IMPORTANT: every list here (and every project list) must be a
+    # top-level list — NOT inside a Reminders "Group" (folder). Groups
+    # are also invisible to AppleScript/JXA. Use a naming prefix instead
+    # if you want visual organization, e.g. "Work — Launch X".
     # project lists are created ad hoc, one per active project/goal,
     # with Kanban sections — see docs/reminders-setup.md.
     # NOTE: reminders-mcp-server cannot read/write sections (AppleScript
