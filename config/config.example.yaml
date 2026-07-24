@@ -30,8 +30,14 @@ todo_backend:
       this_quarter: "This Quarter"
       maybe: "Maybe"
     # project lists are created ad hoc, one per active project/goal,
-    # with Kanban sections — see docs/reminders-setup.md
+    # with Kanban sections — see docs/reminders-setup.md.
+    # NOTE: reminders-mcp-server cannot read/write sections (AppleScript
+    # limitation) — this list is for the one-time manual setup only, not
+    # something a skill can pass to add_todo.
     kanban_sections: ["Backlog", "This Week", "Today", "Done"]
+    # NOTE: reminders-mcp-server does not currently support tags — no tool
+    # can read or set them. This field is aspirational until tag support
+    # is added to the server; don't rely on it in skills yet.
     tag_prefix: "#goal-"       # tags used to link tasks back to a quarterly goal
   # --- yjs-specific (if todo_backend.type == yjs) ---
   yjs:
