@@ -26,7 +26,7 @@ todo_backend:
   reminders:
     lists:
       inbox: "Inbox"
-      maybe_later: "Maybe/Later"
+      someday_maybe: "Someday/Maybe"
     kanban_sections: ["Backlog", "Next", "Doing", "Done", "Archived"]
     tag_prefix: "#goal-"
   yjs:

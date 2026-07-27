@@ -32,7 +32,10 @@ todo_backend:
     # docs/reminders-setup.md.
     lists:
       inbox: "Inbox"
-      maybe_later: "Maybe/Later"
+      # A REAL list — must not share a name with any Smart List you've
+      # created (e.g. a custom "no due date" filter list). Smart Lists,
+      # built-in or custom, are invisible to AppleScript/JXA either way.
+      someday_maybe: "Someday/Maybe"
     # IMPORTANT: every list here (and every project list) must be a
     # top-level list — NOT inside a Reminders "Group" (folder). Groups
     # are also invisible to AppleScript/JXA. Use a naming prefix instead

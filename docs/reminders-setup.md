@@ -11,7 +11,10 @@ use a naming prefix (e.g. "Work — Launch X") instead of a Group.
 Create these as standard Reminders lists (names configurable in
 `config/config.yaml` under `todo_backend.reminders.lists`):
 - **Inbox** — capture only; landing zone for anything new until triaged
-- **Maybe** — GTD Someday/Maybe
+- **Someday/Maybe** — GTD Someday/Maybe. Must be a real list you create
+  yourself — don't reuse the name of any custom Smart List you've built
+  (e.g. a "no due date" filter view). Smart Lists, built-in or custom, are
+  invisible to AppleScript/JXA either way — see the note below.
 
 Plus one list per active project/goal (see below).
 
@@ -23,7 +26,7 @@ criteria), and Reminders' scripting dictionary defines no "smart list"
 class — there is no way for AppleScript/JXA to read a Smart List by name.
 
 Instead, time horizons are **computed on demand** by the `get_due_todos`
-tool: it scans every real list (Inbox, Maybe, project lists) and filters
+tool: it scans every real list (Inbox, Someday/Maybe, project lists) and filters
 by due date — `horizon: today | this_week | this_month | this_quarter`.
 This is exactly what Reminders' own Smart Lists do internally; we're just
 doing the same filtering ourselves so it's scriptable.
@@ -40,7 +43,7 @@ survive a week untriaged). Triaging means one of:
 - Move to a project list (it belongs to an active goal)
 - Give it a due date if it's a real near-term action (this is what makes
   it show up in `get_due_todos` horizon queries — no list move needed)
-- Move to Maybe (not now, but worth keeping)
+- Move to Someday/Maybe (not now, but worth keeping)
 - Delete (wasn't actually worth keeping)
 - Do it immediately if it takes under two minutes, then delete it (GTD's
   two-minute rule) rather than filing it anywhere

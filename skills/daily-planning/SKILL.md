@@ -34,7 +34,7 @@ scheduled task fires at `review_cadence.daily_planning_time`.
 2. **Check carryover first.** Anything `get_due_todos(horizon: today)`
    returns that's from a prior day (overdue) or was already "today"
    yesterday: ask whether it's still relevant, should stay due today, or
-   should get a new due date (pushed out, or cleared back toward Maybe).
+   should get a new due date (pushed out, or cleared back toward Someday/Maybe).
 
 3. **Quick Inbox skim** (if `gtd` enabled). Not a full triage — that's
    weekly review's job. Just check whether anything in Inbox is urgent

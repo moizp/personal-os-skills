@@ -16,7 +16,7 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
 
 ## Inputs to read first
 1. `config/config.yaml` → `todo_backend`, `review_cadence`, `frameworks`
-2. Current Inbox and Maybe list contents, and any active project Kanban
+2. Current Inbox and Someday/Maybe list contents, and any active project Kanban
    boards — actually query them, don't assume.
 3. **`get_due_todos(horizon: this_week, includeCompleted: true)`** — this
    is "This Week," not a named list (Smart Lists aren't scriptable; see
@@ -31,7 +31,7 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
 1. **Inbox triage** (if `gtd` enabled). Read the real Inbox list. For
    every item: move it to a project list, give it a due date (this makes
    it show up in future `get_due_todos` horizon queries — no list move
-   needed), move it to Maybe, or flag it for deletion — nothing should
+   needed), move it to Someday/Maybe, or flag it for deletion — nothing should
    survive this step still sitting in Inbox untouched. If it takes under
    two minutes, note it could just be done now rather than filed.
 
@@ -41,7 +41,7 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
    performance review.
 
 3. **Someday/Maybe MUST be touched this step.** Per GTD, this list rots if
-   skipped. Surface it explicitly: "here's what's in Maybe — anything
+   skipped. Surface it explicitly: "here's what's in Someday/Maybe — anything
    ready to activate, or still parked?" Don't skip this even if the list
    looks unchanged from last week.
 

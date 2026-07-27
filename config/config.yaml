@@ -28,7 +28,10 @@ todo_backend:
     # Lists, not scriptable. Time horizons are computed by get_due_todos.
     lists:
       inbox: "Inbox"
-      maybe_later: "Maybe/Later"
+      # A REAL list, distinct from the "Later" custom Smart List (which
+      # filters no-due-date reminders and is invisible to AppleScript/JXA
+      # like any Smart List — see reminders-mcp-server/docs/limitations.md).
+      someday_maybe: "Someday/Maybe"
     # project lists are created ad hoc, one per active project/goal,
     # with Kanban sections — see docs/reminders-setup.md
     kanban_sections: ["Backlog", "Next", "Doing", "Done", "Archived"]
