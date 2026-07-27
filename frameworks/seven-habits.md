@@ -14,6 +14,18 @@ here — those belong in your Claude Project, separate from this file.
   urgent-but-unimportant noise. If big rocks aren't scheduled first, they
   never get scheduled.
 
+- **The Time Management Matrix.** Every task falls into one of four
+  quadrants, crossing urgency against importance:
+
+  |                | **Urgent**                          | **Not Urgent**                        |
+  |----------------|--------------------------------------|----------------------------------------|
+  | **Important**     | Q1 — Crises, deadlines. Necessary, but living here means you're always reacting. | Q2 — Big Rocks: planning, prevention, relationships, real goal work. This is where effectiveness is built. |
+  | **Not Important** | Q3 — Interruptions, other people's urgent asks. Feels productive, isn't. Usually a delegate/decline candidate. | Q4 — Busywork, distraction. Cut, don't schedule. |
+
+  The goal isn't to eliminate Q1 (crises happen) — it's to keep Q3 and Q4
+  from crowding out Q2. A week that's mostly Q1/Q3 is a week where nothing
+  moved the actual goals forward, even if it felt full.
+
 - **Begin with the end in mind.** Quarterly/annual goals should trace back
   to a small number of stated long-term outcomes or a personal mission,
   not be generated fresh each planning cycle.
@@ -27,6 +39,8 @@ here — those belong in your Claude Project, separate from this file.
 
 - Quarterly goal-setting should ask: "which role does this serve?"
 - Weekly review should check: "did the big rocks get scheduled, or did
-  urgent noise crowd them out?"
+  urgent noise crowd them out?" — specifically, flag anything that looks
+  like Quadrant III (urgent, not important — someone else's priority, not
+  yours) rather than lumping it in as generic busyness.
 - Daily planning should pull from the week's plan, not invent priorities
   from scratch each morning.

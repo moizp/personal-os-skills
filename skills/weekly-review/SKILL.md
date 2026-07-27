@@ -49,8 +49,20 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
    week/month that doesn't trace back to a current quarterly goal — ask
    if it should be added intentionally or dropped.
 
-5. **If `seven_habits` enabled**: check role balance — were any roles
-   completely absent from this week's actual activity?
+5. **If `seven_habits` enabled**:
+   - Check role balance — were any roles completely absent from this
+     week's actual activity?
+   - **Quadrant III check.** Looking at what actually got done this week
+     (from step 2) and what's staged (from step 9), flag anything that's
+     urgent-but-not-important — someone else's priority landing on your
+     plate, not tied to a role or quarterly goal — rather than folding it
+     into generic "busyness." Don't just count these; name one or two
+     specific examples and ask whether each is worth declining or
+     delegating next time, not just noting the pattern in the abstract.
+   - If most of the week's actual activity was Quadrant I (crises) or
+     Quadrant III rather than Quadrant II (the staged big rocks), say so
+     directly — that's the sign this system exists to catch, not a minor
+     footnote.
 
 6. **If `atomic_habits` enabled**: check recurring-habit todos for streak
    health. If a habit was missed multiple times, prompt: which of the
@@ -82,5 +94,6 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
 
 ## Output
 A short summary: what got done, what's flagged in Someday/Maybe, what's
-staged for next week (with due dates), and any role/habit/goal
-misalignment worth the user's attention.
+staged for next week (with due dates), any Quadrant III items worth
+declining or delegating, and any role/habit/goal misalignment worth the
+user's attention.
