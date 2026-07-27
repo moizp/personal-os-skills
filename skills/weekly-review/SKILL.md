@@ -24,7 +24,9 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
    so completions can be reviewed against what was planned.
 4. **`get_due_todos(horizon: this_month)`** — candidates to stage into
    next week.
-5. The quarterly goals artifact, for alignment checking.
+5. The goals artifact (`goals.artifact_name`) — specifically this
+   quarter's milestones and their parent yearly goals, for alignment
+   checking.
 
 ## Procedure
 
@@ -45,9 +47,10 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
    ready to activate, or still parked?" Don't skip this even if the list
    looks unchanged from last week.
 
-4. **Check alignment with quarterly goals.** Flag anything due this
-   week/month that doesn't trace back to a current quarterly goal — ask
-   if it should be added intentionally or dropped.
+4. **Check alignment with quarterly milestones.** Flag anything due this
+   week/month that doesn't trace back to a current quarterly milestone
+   (and, through it, a yearly goal) — ask if it should be added
+   intentionally or dropped.
 
 5. **If `seven_habits` enabled**:
    - Check role balance — were any roles completely absent from this
@@ -55,8 +58,8 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
    - **Quadrant III check.** Looking at what actually got done this week
      (from step 2) and what's staged (from step 9), flag anything that's
      urgent-but-not-important — someone else's priority landing on your
-     plate, not tied to a role or quarterly goal — rather than folding it
-     into generic "busyness." Don't just count these; name one or two
+     plate, not tied to a role or quarterly milestone — rather than
+     folding it into generic "busyness." Don't just count these; name one or two
      specific examples and ask whether each is worth declining or
      delegating next time, not just noting the pattern in the abstract.
    - If most of the week's actual activity was Quadrant I (crises) or

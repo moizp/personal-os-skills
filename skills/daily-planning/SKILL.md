@@ -22,6 +22,9 @@ scheduled task fires at `review_cadence.daily_planning_time`.
 3. **Query `get_due_todos` with `horizon: this_week`** — candidates that
    could be pulled into today.
 4. Current Inbox contents.
+5. If `seven_habits` is enabled: the goals artifact (`goals.artifact_name`)
+   — specifically this quarter's milestones — so today's big rock (step 5
+   below) can name a real one instead of a generic description.
 
 ## Procedure
 
@@ -47,8 +50,11 @@ scheduled task fires at `review_cadence.daily_planning_time`.
    than pulling everything to today.
 
 5. **If `seven_habits` enabled**: make sure at least one "big rock"
-   (important-not-urgent, tied to a role/quarterly goal) is on the list,
-   not just reactive small items.
+   (important-not-urgent, Quadrant II) is on the list, tied to a specific
+   current-quarter milestone from the goals artifact — not just described
+   generically as "goal-related." If nothing in today's or this week's
+   items traces back to an active milestone, say so rather than picking
+   an arbitrary task to label as the big rock.
 
 6. **If `atomic_habits` enabled**: include the day's recurring habit-todos
    automatically, don't make the user re-add them.
