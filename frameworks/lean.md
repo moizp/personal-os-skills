@@ -20,7 +20,7 @@ Generic summary for use by Skills.
   final version of the goal.
 
 - **Timeboxing.** Give a task or experiment a fixed, small time budget
-  rather than "however long it takes." Timeboxing forces prioritization
+  rather than "however long it takes." Timeboxing forces prioritisation
   (what can actually get done in the box) and surfaces stalled work
   quickly instead of letting it silently expand.
 
@@ -42,6 +42,6 @@ Generic summary for use by Skills.
 - Weekly review should ask what was *learned*, not just what was
   completed — a "failed" timeboxed experiment that produced a clear
   answer is a success in Lean terms.
-- Works well alongside GTD (both value externalizing and clarifying work)
-  but differs in emphasis: GTD organizes all commitments; Lean is
+- Works well alongside GTD (both value externalising and clarifying work)
+  but differs in emphasis: GTD organises all commitments; Lean is
   specifically about de-risking uncertain ones before over-investing.

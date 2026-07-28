@@ -4,11 +4,11 @@ A generic, reusable system for turning long-term goals into weekly and daily
 execution, built on Claude Projects, Skills, and Cowork.
 
 It combines five frameworks:
-- **Seven Habits** (Stephen Covey) — roles, big rocks, proactive prioritization
+- **Seven Habits** (Stephen Covey) — roles, big rocks, proactive prioritisation
 - **Atomic Habits** (James Clear) — identity-based habits, habit stacking
 - **Culture Code** (Daniel Coyle) — psychological safety, belonging cues (most
   relevant if you're applying this to a team, not just yourself)
-- **Getting Things Done** (David Allen) — capture, clarify, organize, reflect, engage
+- **Getting Things Done** (David Allen) — capture, clarify, organise, reflect, engage
 - **Lean** (Lean Startup / Lean Thinking) — timeboxing, testing the
   riskiest assumption before full commitment, small batch sizes
 

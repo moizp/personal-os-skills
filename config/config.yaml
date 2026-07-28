@@ -50,8 +50,7 @@ review_cadence:
   weekly_review_time: "19:00"
   quarterly_review: "last week of each quarter"
 
-notes:
-  # Free text — anything a skill should always know about how you work.
-  # Keep this short; long personal context belongs in your Claude Project,
-  # not in this repo.
-  ""
+notes: >
+  I'm based in New Zealand — use British/NZ English spelling (organise,
+  prioritise, behaviour, colour, etc.), not American spelling, in
+  anything a skill writes or generates.

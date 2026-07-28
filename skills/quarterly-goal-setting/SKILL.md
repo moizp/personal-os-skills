@@ -64,12 +64,12 @@ shape (markdown, not a rigid schema — keep it human-editable):
 
 ## Procedure
 
-1. **Review before planning.** Summarize what actually happened against
+1. **Review before planning.** Summarise what actually happened against
    the current quarter's milestones — completed, partial, dropped, and
    why (in one line each, not a full retrospective essay). Skip this on a
    genuine first run.
 
-2. **If `seven_habits` is enabled**: organize goals by role
+2. **If `seven_habits` is enabled**: organise goals by role
    (`goals.roles` from config). Ask which roles are being neglected before
    proposing new goals, don't just take the user's first list at face
    value.

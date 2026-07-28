@@ -5,7 +5,7 @@
 "Group" (folder).** Groups are invisible to AppleScript/JXA — confirmed
 empirically, and consistent with the fact that `sdef` defines no group
 class at all. A list inside a Group can't be read or written by
-`reminders-mcp-server`. If you want visual organization in the sidebar,
+`reminders-mcp-server`. If you want visual organisation in the sidebar,
 use a naming prefix (e.g. "Work — Launch X") instead of a Group.
 
 Create these as standard Reminders lists (names configurable in

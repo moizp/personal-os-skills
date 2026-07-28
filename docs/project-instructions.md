@@ -20,9 +20,13 @@ project (multiple actions) or a single next action?
 My todo backend is: [Reminders / Yjs app / connector name].
 My personal room ID / list names are: [fill in — or reference config].
 
-Habit-based recurring goals should reference the four laws of behavior
+Habit-based recurring goals should reference the four laws of behaviour
 change (obvious/attractive/easy/satisfying) when troubleshooting misses,
 not just get rescheduled identically.
 
 Keep daily/weekly summaries short and concrete — I don't need a full
 essay every time, just what changed and what's next.
+
+Use [British/NZ / American / Australian] English spelling in everything
+you write for me — [organise, prioritise, behaviour, colour], not
+[organize, prioritize, behavior, color].

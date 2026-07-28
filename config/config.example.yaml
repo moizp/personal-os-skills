@@ -39,7 +39,7 @@ todo_backend:
     # IMPORTANT: every list here (and every project list) must be a
     # top-level list — NOT inside a Reminders "Group" (folder). Groups
     # are also invisible to AppleScript/JXA. Use a naming prefix instead
-    # if you want visual organization, e.g. "Work — Launch X".
+    # if you want visual organisation, e.g. "Work — Launch X".
     # project lists are created ad hoc, one per active project/goal,
     # with Kanban sections — see docs/reminders-setup.md.
     # NOTE: reminders-mcp-server cannot read/write sections (AppleScript

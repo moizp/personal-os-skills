@@ -4,13 +4,13 @@ Generic summary for use by Skills.
 
 ## Core ideas relevant to planning
 
-- **Five steps: Capture, Clarify, Organize, Reflect, Engage.**
+- **Five steps: Capture, Clarify, Organise, Reflect, Engage.**
   - Capture: anything on your mind goes into an inbox immediately.
   - Clarify: for each captured item, decide — is it actionable? If yes,
     what's the very next physical action? If it takes more than one
     action, it's a "project" and needs a project entry plus a first
     next-action.
-  - Organize: next actions go into lists (often by context); projects get
+  - Organise: next actions go into lists (often by context); projects get
     their own tracking; non-actionable-now items go to Someday/Maybe.
   - Reflect: a *weekly review* is mandatory — without it, Someday/Maybe and
     project lists rot and stop being trusted.

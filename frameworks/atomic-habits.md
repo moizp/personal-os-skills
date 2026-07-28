@@ -9,7 +9,7 @@ Generic summary for use by Skills.
   instances should be tagged/tracked as recurring identity votes, not
   one-off tasks.
 
-- **The four laws of behavior change**: make it obvious, make it
+- **The four laws of behaviour change**: make it obvious, make it
   attractive, make it easy, make it satisfying. Useful as a checklist when
   a recurring habit-todo keeps getting skipped — diagnose which law is
   broken rather than just rescheduling it.
