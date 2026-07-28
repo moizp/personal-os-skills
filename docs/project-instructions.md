@@ -27,6 +27,7 @@ not just get rescheduled identically.
 Keep daily/weekly summaries short and concrete — I don't need a full
 essay every time, just what changed and what's next.
 
-Use [British/NZ / American / Australian] English spelling in everything
-you write for me — [organise, prioritise, behaviour, colour], not
-[organize, prioritize, behavior, color].
+Use the spelling convention that matches `user.locale` in config.yaml —
+en-GB/en-NZ/en-AU means British spelling (organise, prioritise,
+behaviour); en-US means American spelling (organize, prioritize,
+behavior).

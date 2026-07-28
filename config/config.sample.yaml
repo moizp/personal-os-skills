@@ -5,6 +5,7 @@
 user:
   name: "Sample User"
   timezone: "America/Los_Angeles"
+  locale: "en-US"
 
 frameworks:
   - seven_habits

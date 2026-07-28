@@ -4,7 +4,12 @@
 
 user:
   name: ""                     # e.g. "Alex"
-  timezone: ""                 # e.g. "America/New_York"
+  timezone: ""                 # IANA identifier, e.g. "America/New_York"
+  locale: ""                   # e.g. "en-US" | "en-GB" | "en-NZ" | "en-AU"
+                                # — drives spelling convention: en-GB/en-NZ/
+                                # en-AU use British spelling (organise,
+                                # prioritise, behaviour); en-US uses American
+                                # spelling (organize, prioritize, behavior).
 
 frameworks:
   # Comment out any you don't use. Order = priority when frameworks conflict.
