@@ -4,7 +4,8 @@ description: >
   Use this skill when the user asks for a "weekly review," "weekly
   planning," or it's the scheduled weekly review time from
   config.yaml (review_cadence.weekly_review_day/time). Runs a GTD-style
-  Reflect step and stages next week's priorities.
+  Reflect step, celebrates real progress, reschedules what slipped, and
+  stages next week's priorities.
 ---
 
 # Weekly Review
@@ -20,13 +21,16 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
    boards — actually query them, don't assume.
 3. **`get_due_todos(horizon: this_week, includeCompleted: true)`** — this
    is "This Week," not a named list (Smart Lists aren't scriptable; see
-   `docs/reminders-setup.md`). `includeCompleted: true` here specifically,
-   so completions can be reviewed against what was planned.
+   `docs/reminders-setup.md`). A horizon has no lower bound, so this
+   includes anything overdue from before this week too, whether completed
+   or not — that's the raw material for both the completion check (step 2)
+   and the reschedule check (step 3). `includeCompleted: true` here
+   specifically, so completions can be reviewed against what was planned.
 4. **`get_due_todos(horizon: this_month)`** — candidates to stage into
    next week.
 5. The goals artifact (`goals.artifact_name`) — specifically this
    quarter's milestones and their parent yearly goals, for alignment
-   checking.
+   checking and for step 2's encouragement.
 
 ## Procedure
 
@@ -37,26 +41,44 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
    survive this step still sitting in Inbox untouched. If it takes under
    two minutes, note it could just be done now rather than filed.
 
-2. **Review completions.** Compare `get_due_todos(horizon: this_week,
-   includeCompleted: true)` against what was actually completed. No
-   judgment tone — just facts, this is data for planning, not a
-   performance review.
+2. **Review completions — and give real credit.** Compare step 3's
+   results against what was actually planned. No judgment tone for what
+   didn't happen (that's step 3's job) — but for what DID get done, be
+   specific and genuine: name the actual accomplishment, and if it traces
+   back to a current-quarter milestone or yearly goal (input 5), say which
+   one and why it moved things forward. This isn't a courtesy line —
+   completions tied to a real goal deserve to be called out as such, not
+   folded anonymously into "here's what got done this week." Skip
+   generic praise for routine items; this is about real progress, not
+   participation credit.
 
-3. **Someday/Maybe MUST be touched this step.** Per GTD, this list rots if
+3. **Reschedule what's incomplete.** From step 3's results, anything not
+   completed — including items overdue from before this week, now visible
+   because horizons have no lower bound — needs an actual decision, not a
+   silent carry-forward with the same stale due date:
+   - Still relevant and realistic → set a specific new due date via
+     `update_due_date`.
+   - Not urgent → move toward Someday/Maybe.
+   - Been slipping for multiple weeks running → say so explicitly rather
+     than rescheduling it again on autopilot; ask whether it's genuinely
+     blocked, no longer wanted, or needs to be broken into a smaller
+     next action.
+
+4. **Someday/Maybe MUST be touched this step.** Per GTD, this list rots if
    skipped. Surface it explicitly: "here's what's in Someday/Maybe — anything
    ready to activate, or still parked?" Don't skip this even if the list
    looks unchanged from last week.
 
-4. **Check alignment with quarterly milestones.** Flag anything due this
+5. **Check alignment with quarterly milestones.** Flag anything due this
    week/month that doesn't trace back to a current quarterly milestone
    (and, through it, a yearly goal) — ask if it should be added
    intentionally or dropped.
 
-5. **If `seven_habits` enabled**:
+6. **If `seven_habits` enabled**:
    - Check role balance — were any roles completely absent from this
      week's actual activity?
    - **Quadrant III check.** Looking at what actually got done this week
-     (from step 2) and what's staged (from step 9), flag anything that's
+     (from step 2) and what's staged (from step 10), flag anything that's
      urgent-but-not-important — someone else's priority landing on your
      plate, not tied to a role or quarterly milestone — rather than
      folding it into generic "busyness." Don't just count these; name one or two
@@ -67,28 +89,29 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
      directly — that's the sign this system exists to catch, not a minor
      footnote.
 
-6. **If `atomic_habits` enabled**: check recurring-habit todos for streak
+7. **If `atomic_habits` enabled**: check recurring-habit todos for streak
    health. If a habit was missed multiple times, prompt: which of the
    four laws (obvious/attractive/easy/satisfying) might be broken, rather
    than just re-scheduling it identically.
 
-7. **If `culture_code` enabled** (team context): include a lightweight
+8. **If `culture_code` enabled** (team context): include a lightweight
    "what got in the way" prompt, not just individual task status.
 
-8. **If `lean` enabled**: for any timeboxed experiments (todos tagged/
+9. **If `lean` enabled**: for any timeboxed experiments (todos tagged/
    titled as experiments, e.g. "[EXP] ...") due this week, record what was
    *learned* — assumption held, broken, or inconclusive — not just
    done/not-done. A clearly-failed assumption is a useful outcome; don't
    treat it as a missed task. Flag any experiment that ran past its
    timebox without a recorded outcome.
 
-9. **Stage next week.** From `get_due_todos(horizon: this_month)` and
-   project Backlog/Next columns, pick what's realistic for next week and
-   set/update due dates accordingly via `update_due_date` — this is what
-   "staging" means now, since there's no This Week list to move items
-   into. Keep it realistic, not aspirational.
+10. **Stage next week.** From `get_due_todos(horizon: this_month)` and
+    project Backlog/Next columns, pick what's realistic for next week and
+    set/update due dates accordingly via `update_due_date` — this is what
+    "staging" means now, since there's no This Week list to move items
+    into. Keep it realistic, not aspirational. Distinct from step 3: this
+    is newly committed work, not something that already slipped.
 
-10. **Check Kanban boards for missing due dates**: for any project list
+11. **Check Kanban boards for missing due dates**: for any project list
     using Kanban sections, flag "Doing" items with no due date set at
     all — those are invisible to `get_due_todos`. Don't force the due
     date to match the column name; the column is workflow status, the
@@ -96,7 +119,8 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
     `docs/reminders-setup.md`).
 
 ## Output
-A short summary: what got done, what's flagged in Someday/Maybe, what's
-staged for next week (with due dates), any Quadrant III items worth
-declining or delegating, and any role/habit/goal misalignment worth the
-user's attention.
+A short summary: real credit for what got done (tied to goals where it
+applies), what got rescheduled or dropped and why, what's flagged in
+Someday/Maybe, what's staged for next week (with due dates), any
+Quadrant III items worth declining or delegating, and any role/habit/goal
+misalignment worth the user's attention.
