@@ -54,7 +54,13 @@ description: >
 7. **On review** (weekly-review will surface this): record what was
    actually learned, not just done/not-done. A clearly-failed assumption
    is a valid, useful outcome — treat it as information for revising the
-   goal, not as a missed task.
+   goal, not as a missed task. If the assumption *held*, say so as a real
+   win, specifically — a validated assumption is exactly what de-risked
+   the goal, not just "task complete." If an experiment has run past its
+   timebox more than once without a recorded outcome, flag it directly as
+   stalled rather than quietly extending the deadline again — that's
+   usually a sign the test itself was too big or too vague, not that it
+   needs more time.
 
 ## Output
 A one-paragraph experiment spec: the assumption, the smallest test, the

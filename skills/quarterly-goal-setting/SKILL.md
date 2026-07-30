@@ -64,10 +64,15 @@ shape (markdown, not a rigid schema — keep it human-editable):
 
 ## Procedure
 
-1. **Review before planning.** Summarise what actually happened against
-   the current quarter's milestones — completed, partial, dropped, and
-   why (in one line each, not a full retrospective essay). Skip this on a
-   genuine first run.
+1. **Review before planning — and give real credit.** Summarise what
+   actually happened against the current quarter's milestones. For
+   anything completed, don't fold it into a flat status line — name it
+   specifically and say which yearly goal and role it advanced. A
+   finished milestone is the biggest win this system tracks; treat it
+   that way, not as one bullet among "completed, partial, dropped." For
+   partial/dropped items, stay factual and one line each, no judgment
+   tone — that's what step 9 handles. Skip this step on a genuine first
+   run.
 
 2. **If `seven_habits` is enabled**: organise goals by role
    (`goals.roles` from config). Ask which roles are being neglected before
@@ -106,7 +111,11 @@ shape (markdown, not a rigid schema — keep it human-editable):
 
 9. **Do not silently drop unmet milestones.** Ask the user explicitly
    whether a carried-over milestone should continue next quarter, be
-   redefined, or moved to Someday/Maybe.
+   redefined, or moved to Someday/Maybe. If the same milestone has now
+   slipped across multiple quarters running, say so directly rather than
+   carrying it forward again on autopilot — that's a sign the milestone
+   itself is wrong-sized or the yearly goal needs rethinking, not just a
+   scheduling issue.
 
 ## Output
 An updated (or newly created) goals artifact, plus a short spoken summary
