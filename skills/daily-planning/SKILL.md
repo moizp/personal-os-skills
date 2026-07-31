@@ -25,7 +25,8 @@ scheduled task fires at `review_cadence.daily_planning_time`.
 3. **Query `get_due_todos` with `horizon: this_week`** — candidates that
    could be pulled into today.
 4. Current Inbox contents.
-5. If `seven_habits` is enabled: the goals artifact (`goals.artifact_name`)
+5. If `seven_habits` is enabled: the current calendar year's goals
+   artifact (`<goals.artifact_name> — <year>`; see quarterly-goal-setting)
    — specifically this quarter's milestones — so today's big rock (step 6
    below) and the completion check (step 3) can name a real milestone
    instead of a generic description.

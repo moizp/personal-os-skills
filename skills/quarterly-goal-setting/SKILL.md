@@ -18,9 +18,12 @@ my 6-month goals."
 ## Inputs to read first
 1. `config/config.yaml` → `frameworks`, `goals.horizons`, `goals.roles`,
    `goals.artifact_name`
-2. The current goals artifact (`goals.artifact_name`), if one exists —
-   read actual progress before proposing new goals. If none exists yet,
-   this is a first run — see "Creating the artifact" below.
+2. The current calendar year's goals artifact, named
+   `<goals.artifact_name> — <year>` (e.g. "quarterly-goals — 2027") — see
+   "Artifact naming" below for why it's per-year, not one cumulative
+   document. If it doesn't exist yet, check whether a prior year's
+   artifact does before assuming this is a first run — see "Creating the
+   artifact" below.
 3. Recent weekly review outcomes, if available — real deliverables should
    inform revisions, not just aspiration.
 
@@ -37,18 +40,46 @@ Goals are hierarchical, not a flat list per horizon:
   use this shape — the "yearly goal" is just the annual framing for a
   goal that happens to only span one quarter.
 
-## Creating the artifact (first run only)
-If no artifact named `goals.artifact_name` exists yet, create one now as
-a **persistent Project artifact** — not just a chat reply that disappears
-once the conversation ends. `daily-planning` and `weekly-review` both
-depend on this artifact existing and being current. Use roughly this
-shape (markdown, not a rigid schema — keep it human-editable):
+## Artifact naming: one per calendar year, not one cumulative document
+The goals artifact is named `<goals.artifact_name> — <year>` and scoped
+to a single calendar year — a fresh artifact starts each January, rather
+than one document that grows forever. A multi-year `Actuals` history
+becomes slow to re-read and rewrite every single quarterly-goal-setting
+run, and the artifact's own title (`# <goals.artifact_name> — <year>`)
+already implies year-scoping — this makes that explicit instead of
+leaving it undefined. Prior years' artifacts stay in the Project as
+read-only history; nothing is ever deleted, they just stop being the
+*current* one.
+
+## Creating the artifact
+There are two distinct situations where the current year's artifact
+won't exist yet — handle them differently:
+
+- **Genuine first run** (no artifact for any year exists): create the
+  current year's artifact from scratch, using the shape below.
+
+- **Year rollover** (a prior year's artifact exists, e.g.
+  "quarterly-goals — 2026", but not the current year's): this is not a
+  first run. Read the prior year's artifact, and for each yearly goal
+  that's still active or only partially achieved, carry it forward
+  explicitly into the new artifact — don't silently drop it, and don't
+  silently re-copy it either without asking. Ask the user, per
+  continuing goal: still pursuing this, redefining it, or done/dropped?
+  The new artifact's yearly-goals section should note where a goal came
+  from, e.g. "(carried forward from quarterly-goals — 2026)".
+
+Either way, create it now as a **persistent Project artifact** — not just
+a chat reply that disappears once the conversation ends. `daily-planning`
+and `weekly-review` both depend on this artifact existing and being
+current. Use roughly this shape (markdown, not a rigid schema — keep it
+human-editable):
 
 ```
 # <goals.artifact_name> — <year>
 
 ## Yearly goals
 ### [Role] <outcome-stated yearly goal>
+(carried forward from <prior artifact> — omit this line for a genuinely new goal)
 - Q1: <milestone>
 - Q2: <milestone>
 - Q3: <milestone>
@@ -59,7 +90,9 @@ shape (markdown, not a rigid schema — keep it human-editable):
 ## Actuals
 ### Q1 <year>
 - <goal/milestone>: completed | partial | dropped — one line why
-(append a new dated section each revision; never delete prior actuals)
+(append a new dated section each revision within this year; never delete
+prior actuals. This section resets with each new year's artifact — full
+history lives in the prior year's artifact, not duplicated here.)
 ```
 
 ## Procedure
@@ -83,7 +116,9 @@ shape (markdown, not a rigid schema — keep it human-editable):
    jump straight to quarterly milestones — if the user asks to "set Q3
    goals" mid-year, still check which yearly goal that quarter serves
    before drafting it; if none of the current yearly goals fit, ask
-   whether this is a new yearly goal or genuinely a one-off.
+   whether this is a new yearly goal or genuinely a one-off. On a year
+   rollover (see "Creating the artifact"), this is where carried-forward
+   goals get confirmed, not silently assumed.
 
 4. **Then draft/revise quarterly milestones** for the horizon(s) actually
    being planned (per `goals.horizons`). Each milestone should be:
@@ -105,9 +140,10 @@ shape (markdown, not a rigid schema — keep it human-editable):
    design a timeboxed test rather than committing the full quarter's plan
    on an unverified premise.
 
-8. **Update the artifact** (`goals.artifact_name`) with the revised
-   yearly goals and quarterly milestones. Append this quarter's actuals
-   as a new dated section — never overwrite or delete prior actuals.
+8. **Update the current year's artifact** with the revised yearly goals
+   and quarterly milestones. Append this quarter's actuals as a new
+   dated section — never overwrite or delete prior actuals within the
+   year, and never edit a prior year's artifact except to fix an error.
 
 9. **Do not silently drop unmet milestones.** Ask the user explicitly
    whether a carried-over milestone should continue next quarter, be
