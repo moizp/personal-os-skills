@@ -13,6 +13,13 @@ them.
 When I set quarterly goals, tie each one to [a role / an outcome] and
 check it against my current goals artefact before proposing changes.
 
+[If using ikigai:] My long-term goals live in a separate artefact from my
+yearly/quarterly goals — don't conflate the two. `long-term-goal-setting`
+maintains the long-term one (rarely, not year-scoped);
+`quarterly-goal-setting` reads from it to ground each yearly goal, and
+should say which long-term goal a completion or big rock actually serves,
+not stop at the milestone or yearly goal.
+
 When I break a goal into weekly deliverables, run it through GTD's
 clarify step first — what's the actual next action, and is this a
 project (multiple actions) or a single next action?

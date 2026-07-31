@@ -49,7 +49,7 @@ survive a week untriaged). Triaging means one of:
   two-minute rule) rather than filing it anywhere
 
 ## Project lists (per active goal)
-For each quarterly goal that requires multiple actions:
+For each project or milestone that requires multiple actions:
 1. Create a new list named for the project/goal — top-level, not inside a
    Group (same constraint as above).
 2. Right-click → New Section, and add sections matching
@@ -76,6 +76,6 @@ For each quarterly goal that requires multiple actions:
 
 ## Tags
 Use tags (prefix configurable, default `#goal-`) to link a task back to
-its quarterly goal even across different lists — e.g. `#goal-launch-x`.
+the goal it serves even across different lists — e.g. `#goal-launch-x`.
 This is a cross-cutting filter, separate from both the Kanban board and
 the horizon-query mechanism.

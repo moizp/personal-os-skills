@@ -12,10 +12,12 @@ frameworks:
   - atomic_habits
   - gtd
   - lean
+  - ikigai
 
 goals:
   horizons: [3, 6, 9, 12]
   artefact_name: "quarterly-goals"
+  long_term_artefact_name: "long-term-goals"
   roles:
     - "Health"
     - "Career"
