@@ -3,7 +3,7 @@
 A generic, reusable system for turning long-term goals into weekly and daily
 execution, built on Claude Projects, Skills, and Cowork.
 
-It combines five frameworks:
+It combines six frameworks:
 - **Seven Habits** (Stephen Covey) — roles, big rocks, proactive prioritisation
 - **Atomic Habits** (James Clear) — identity-based habits, habit stacking
 - **Culture Code** (Daniel Coyle) — psychological safety, belonging cues (most
@@ -11,8 +11,12 @@ It combines five frameworks:
 - **Getting Things Done** (David Allen) — capture, clarify, organise, reflect, engage
 - **Lean** (Lean Startup / Lean Thinking) — timeboxing, testing the
   riskiest assumption before full commitment, small batch sizes
+- **Ikigai** — long-term direction from the overlap of what you love, what
+  you're good at, what the world needs, and what you can be paid for; feeds
+  `long-term-goal-setting`, which grounds yearly goals (needs `seven_habits`
+  enabled too)
 
-You don't need to use all five. Pick what fits in your `config/config.yaml`
+You don't need to use all six. Pick what fits in your `config/config.yaml`
 (see below).
 
 ---
@@ -27,8 +31,10 @@ personal-os-skills/
 │   ├── atomic-habits.md
 │   ├── culture-code.md
 │   ├── gtd.md
-│   └── lean.md
+│   ├── lean.md
+│   └── ikigai.md
 ├── skills/                    ← the actual Claude Skills (procedures)
+│   ├── long-term-goal-setting/SKILL.md
 │   ├── quarterly-goal-setting/SKILL.md
 │   ├── weekly-review/SKILL.md
 │   ├── daily-planning/SKILL.md
@@ -63,7 +69,7 @@ cp config/config.example.yaml config/config.yaml
 Edit `config/config.yaml`:
 - Which frameworks you're using (comment out ones you don't want)
 - Your Reminders list names (or your todo backend of choice)
-- Your quarterly-goal artifact location/naming convention
+- Your quarterly-goal artefact location/naming convention
 - Your review cadence (day/time for weekly review, etc.)
 
 Look at `config/config.sample.yaml` for a real filled-in example.
@@ -90,7 +96,7 @@ Pick one and follow its doc:
 Point Claude's Skills settings (or your Cowork skill directory) at the
 `skills/` folder in this repo — either by cloning directly into the expected
 skills path, or symlinking it in. Skills read `config/config.yaml` at
-runtime, so one install works for all three skills.
+runtime, so one install works for all of them.
 
 ### 6. (Optional) Set up Cowork scheduled tasks
 Once the above works manually in chat a few times, promote the recurring

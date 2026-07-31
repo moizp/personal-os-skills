@@ -20,7 +20,7 @@ description: >
 1. `config/config.yaml` → confirm `lean` is in `frameworks`; if not, ask
    whether to proceed anyway or skip.
 2. The goal or plan the assumption belongs to (from the quarterly goals
-   artifact, if applicable).
+   artefact, if applicable).
 
 ## Procedure
 

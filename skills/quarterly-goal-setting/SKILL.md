@@ -4,8 +4,10 @@ description: >
   Use this skill when the user wants to set, plan, or revise yearly or
   quarterly goals, or asks to "plan next quarter," "set my goals for the
   year," "set quarterly goals," or similar. Reads config/config.yaml for
-  which frameworks and horizons apply. Maintains a persistent goals
-  artifact that daily-planning and weekly-review both read from.
+  which frameworks and horizons apply, and (if `ikigai` is enabled) reads
+  the long-term-goals artefact from `long-term-goal-setting` to ground
+  yearly goals. Maintains a persistent, per-year goals artefact that
+  daily-planning and weekly-review both read from.
 ---
 
 # Quarterly Goal Setting
@@ -17,20 +19,32 @@ my 6-month goals."
 
 ## Inputs to read first
 1. `config/config.yaml` → `frameworks`, `goals.horizons`, `goals.roles`,
-   `goals.artifact_name`
-2. The current calendar year's goals artifact, named
-   `<goals.artifact_name> — <year>` (e.g. "quarterly-goals — 2027") — see
-   "Artifact naming" below for why it's per-year, not one cumulative
+   `goals.artefact_name`
+2. The current calendar year's goals artefact, named
+   `<goals.artefact_name> — <year>` (e.g. "quarterly-goals — 2027") — see
+   "Artefact naming" below for why it's per-year, not one cumulative
    document. If it doesn't exist yet, check whether a prior year's
-   artifact does before assuming this is a first run — see "Creating the
-   artifact" below.
+   artefact does before assuming this is a first run — see "Creating the
+   artefact" below.
 3. Recent weekly review outcomes, if available — real deliverables should
    inform revisions, not just aspiration.
+4. If `ikigai` is enabled: the long-term-goals artefact
+   (`goals.long_term_artefact_name`; see `long-term-goal-setting`) — this
+   is what yearly goals should trace back to. If it doesn't exist yet,
+   see step 3 of the procedure below before drafting yearly goals.
 
-## Structure: yearly goals first, then quarterly milestones
+## Structure: long-term goals first, then yearly goals, then quarterly milestones
 Goals are hierarchical, not a flat list per horizon:
-- **Yearly (12-month) goals** are the top-level commitment — the outcome
-  that matters over the year, one per relevant role.
+- **Long-term goals** (if `ikigai` is enabled — see `long-term-goal-setting`)
+  are the top-level commitment: multi-year direction, grounded in ikigai,
+  one or two per relevant role. This skill doesn't create these, only
+  reads them.
+- **Yearly (12-month) goals** are the top-level commitment when `ikigai`
+  isn't enabled, or the concrete annual expression of a long-term goal
+  when it is — one per relevant role. A yearly goal with no parent
+  long-term goal (when `ikigai` is enabled) is a flag to raise, same
+  treatment as an unparented milestone below — not a hard block, since
+  not every role needs a long-term goal yet (see `long-term-goal-setting`).
 - **Quarterly milestones** are how each yearly goal actually gets
   reached — a concrete, checkable deliverable for a specific quarter that
   ladders up to exactly one yearly goal. A quarterly milestone with no
@@ -40,46 +54,47 @@ Goals are hierarchical, not a flat list per horizon:
   use this shape — the "yearly goal" is just the annual framing for a
   goal that happens to only span one quarter.
 
-## Artifact naming: one per calendar year, not one cumulative document
-The goals artifact is named `<goals.artifact_name> — <year>` and scoped
-to a single calendar year — a fresh artifact starts each January, rather
+## Artefact naming: one per calendar year, not one cumulative document
+The goals artefact is named `<goals.artefact_name> — <year>` and scoped
+to a single calendar year — a fresh artefact starts each January, rather
 than one document that grows forever. A multi-year `Actuals` history
 becomes slow to re-read and rewrite every single quarterly-goal-setting
-run, and the artifact's own title (`# <goals.artifact_name> — <year>`)
+run, and the artefact's own title (`# <goals.artefact_name> — <year>`)
 already implies year-scoping — this makes that explicit instead of
-leaving it undefined. Prior years' artifacts stay in the Project as
+leaving it undefined. Prior years' artefacts stay in the Project as
 read-only history; nothing is ever deleted, they just stop being the
 *current* one.
 
-## Creating the artifact
-There are two distinct situations where the current year's artifact
+## Creating the artefact
+There are two distinct situations where the current year's artefact
 won't exist yet — handle them differently:
 
-- **Genuine first run** (no artifact for any year exists): create the
-  current year's artifact from scratch, using the shape below.
+- **Genuine first run** (no artefact for any year exists): create the
+  current year's artefact from scratch, using the shape below.
 
-- **Year rollover** (a prior year's artifact exists, e.g.
+- **Year rollover** (a prior year's artefact exists, e.g.
   "quarterly-goals — 2026", but not the current year's): this is not a
-  first run. Read the prior year's artifact, and for each yearly goal
+  first run. Read the prior year's artefact, and for each yearly goal
   that's still active or only partially achieved, carry it forward
-  explicitly into the new artifact — don't silently drop it, and don't
+  explicitly into the new artefact — don't silently drop it, and don't
   silently re-copy it either without asking. Ask the user, per
   continuing goal: still pursuing this, redefining it, or done/dropped?
-  The new artifact's yearly-goals section should note where a goal came
+  The new artefact's yearly-goals section should note where a goal came
   from, e.g. "(carried forward from quarterly-goals — 2026)".
 
-Either way, create it now as a **persistent Project artifact** — not just
+Either way, create it now as a **persistent Project artefact** — not just
 a chat reply that disappears once the conversation ends. `daily-planning`
-and `weekly-review` both depend on this artifact existing and being
+and `weekly-review` both depend on this artefact existing and being
 current. Use roughly this shape (markdown, not a rigid schema — keep it
 human-editable):
 
 ```
-# <goals.artifact_name> — <year>
+# <goals.artefact_name> — <year>
 
 ## Yearly goals
 ### [Role] <outcome-stated yearly goal>
-(carried forward from <prior artifact> — omit this line for a genuinely new goal)
+(carried forward from <prior artefact> — omit this line for a genuinely new goal)
+(grounded in: <long-term goal from the long-term-goals artefact> — omit if `ikigai` is disabled or this genuinely has no long-term parent yet)
 - Q1: <milestone>
 - Q2: <milestone>
 - Q3: <milestone>
@@ -91,8 +106,8 @@ human-editable):
 ### Q1 <year>
 - <goal/milestone>: completed | partial | dropped — one line why
 (append a new dated section each revision within this year; never delete
-prior actuals. This section resets with each new year's artifact — full
-history lives in the prior year's artifact, not duplicated here.)
+prior actuals. This section resets with each new year's artefact — full
+history lives in the prior year's artefact, not duplicated here.)
 ```
 
 ## Procedure
@@ -117,8 +132,17 @@ history lives in the prior year's artifact, not duplicated here.)
    goals" mid-year, still check which yearly goal that quarter serves
    before drafting it; if none of the current yearly goals fit, ask
    whether this is a new yearly goal or genuinely a one-off. On a year
-   rollover (see "Creating the artifact"), this is where carried-forward
+   rollover (see "Creating the artefact"), this is where carried-forward
    goals get confirmed, not silently assumed.
+
+   If `ikigai` is enabled: check each yearly goal against the long-term-
+   goals artefact — which long-term goal does this serve? If the artefact
+   doesn't exist yet, ask whether to run `long-term-goal-setting` first
+   (recommended, especially on a genuine first run) or proceed with
+   yearly goals unparented for now. If a yearly goal genuinely doesn't
+   trace to any long-term goal, that's fine to flag and proceed with —
+   not every yearly goal needs deep grounding, but it shouldn't go
+   unnoticed either.
 
 4. **Then draft/revise quarterly milestones** for the horizon(s) actually
    being planned (per `goals.horizons`). Each milestone should be:
@@ -140,10 +164,10 @@ history lives in the prior year's artifact, not duplicated here.)
    design a timeboxed test rather than committing the full quarter's plan
    on an unverified premise.
 
-8. **Update the current year's artifact** with the revised yearly goals
+8. **Update the current year's artefact** with the revised yearly goals
    and quarterly milestones. Append this quarter's actuals as a new
    dated section — never overwrite or delete prior actuals within the
-   year, and never edit a prior year's artifact except to fix an error.
+   year, and never edit a prior year's artefact except to fix an error.
 
 9. **Do not silently drop unmet milestones.** Ask the user explicitly
    whether a carried-over milestone should continue next quarter, be
@@ -154,5 +178,5 @@ history lives in the prior year's artifact, not duplicated here.)
    scheduling issue.
 
 ## Output
-An updated (or newly created) goals artifact, plus a short spoken summary
+An updated (or newly created) goals artefact, plus a short spoken summary
 of what changed and why (in plain language, not a wall of bullet points).

@@ -11,7 +11,7 @@ uploaded to this project's knowledge, and my config
 them.
 
 When I set quarterly goals, tie each one to [a role / an outcome] and
-check it against my current goals artifact before proposing changes.
+check it against my current goals artefact before proposing changes.
 
 When I break a goal into weekly deliverables, run it through GTD's
 clarify step first — what's the actual next action, and is this a

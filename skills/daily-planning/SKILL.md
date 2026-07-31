@@ -26,7 +26,7 @@ scheduled task fires at `review_cadence.daily_planning_time`.
    could be pulled into today.
 4. Current Inbox contents.
 5. If `seven_habits` is enabled: the current calendar year's goals
-   artifact (`<goals.artifact_name> — <year>`; see quarterly-goal-setting)
+   artefact (`<goals.artefact_name> — <year>`; see quarterly-goal-setting)
    — specifically this quarter's milestones — so today's big rock (step 6
    below) and the completion check (step 3) can name a real milestone
    instead of a generic description.
@@ -51,7 +51,7 @@ scheduled task fires at `review_cadence.daily_planning_time`.
    completed (finished since the last check-in, including anything that
    was overdue and got done): give a short, specific acknowledgment — name
    the actual task, not a generic "great job." If it traces back to a
-   current-quarter milestone from the goals artifact (input 5), say which
+   current-quarter milestone from the goals artefact (input 5), say which
    one and why it matters, rather than treating all completions the same.
    Skip this step quietly if there's nothing worth calling out — don't
    manufacture praise for routine items just to fill the step.
@@ -68,7 +68,7 @@ scheduled task fires at `review_cadence.daily_planning_time`.
 
 6. **If `seven_habits` enabled**: make sure at least one "big rock"
    (important-not-urgent, Quadrant II) is on the list, tied to a specific
-   current-quarter milestone from the goals artifact — not just described
+   current-quarter milestone from the goals artefact — not just described
    generically as "goal-related." If nothing in today's or this week's
    items traces back to an active milestone, say so rather than picking
    an arbitrary task to label as the big rock.

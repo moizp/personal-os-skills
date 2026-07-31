@@ -15,7 +15,7 @@ frameworks:
 
 goals:
   horizons: [3, 6, 9, 12]
-  artifact_name: "quarterly-goals"
+  artefact_name: "quarterly-goals"
   roles:
     - "Health"
     - "Career"

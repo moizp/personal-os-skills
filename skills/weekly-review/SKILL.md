@@ -28,8 +28,8 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
    specifically, so completions can be reviewed against what was planned.
 4. **`get_due_todos(horizon: this_month)`** — candidates to stage into
    next week.
-5. The current calendar year's goals artifact
-   (`<goals.artifact_name> — <year>`; see quarterly-goal-setting) —
+5. The current calendar year's goals artefact
+   (`<goals.artefact_name> — <year>`; see quarterly-goal-setting) —
    specifically this quarter's milestones and their parent yearly goals,
    for alignment checking and for step 2's encouragement.
 

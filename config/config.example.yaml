@@ -17,11 +17,15 @@ frameworks:
   - atomic_habits
   - gtd
   - lean
+  # - ikigai                  # long-term direction (see long-term-goal-setting) —
+                               # uncomment along with seven_habits to use it
   # - culture_code            # uncomment if applying this to a team, not just yourself
 
 goals:
   horizons: [3, 6, 9, 12]      # months
-  artifact_name: "quarterly-goals"   # name of the Claude artifact / tracker
+  artefact_name: "quarterly-goals"   # name of the Claude artefact / tracker
+  long_term_artefact_name: "long-term-goals"   # see long-term-goal-setting;
+                                                # not year-scoped, unlike the above
   # If goals should map to Covey "roles," list them here (optional)
   roles: []                    # e.g. ["Parent", "Engineer", "Health", "Community"]
 
