@@ -95,6 +95,8 @@ human-editable):
 ### [Role] <outcome-stated yearly goal>
 (carried forward from <prior artefact> — omit this line for a genuinely new goal)
 (grounded in: <long-term goal from the long-term-goals artefact> — omit if `ikigai` is disabled or this genuinely has no long-term parent yet)
+(achieved <date> — add this once all four quarters' milestones are done;
+don't delete the goal, mark it achieved so the record stays visible)
 - Q1: <milestone>
 - Q2: <milestone>
 - Q3: <milestone>
@@ -121,6 +123,16 @@ history lives in the prior year's artefact, not duplicated here.)
    partial/dropped items, stay factual and one line each, no judgment
    tone — that's what step 9 handles. Skip this step on a genuine first
    run.
+
+   **Check for yearly goals now fully achieved.** If every quarter's
+   milestone under a yearly goal is now done (not just this quarter's),
+   don't leave that implicit in a pile of individually-completed
+   milestones — ask whether to mark the yearly goal itself achieved.
+   If it is, and `ikigai` is enabled and the goal carries a `(grounded
+   in: ...)` annotation, append a brief revision-history entry to the
+   long-term-goals artefact noting the achievement and what it means for
+   that long-term goal's progress (see `long-term-goal-setting`'s
+   artefact shape) — a short note, not a full re-run of that skill.
 
 2. **If `seven_habits` is enabled**: organise goals by role
    (`goals.roles` from config). Ask which roles are being neglected before
@@ -168,6 +180,9 @@ history lives in the prior year's artefact, not duplicated here.)
    and quarterly milestones. Append this quarter's actuals as a new
    dated section — never overwrite or delete prior actuals within the
    year, and never edit a prior year's artefact except to fix an error.
+   If step 1 identified a newly-achieved yearly goal, add the
+   `(achieved <date>)` annotation to it now rather than leaving it
+   implicit in the Actuals log.
 
 9. **Do not silently drop unmet milestones.** Ask the user explicitly
    whether a carried-over milestone should continue next quarter, be

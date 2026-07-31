@@ -27,9 +27,11 @@ scheduled task fires at `review_cadence.daily_planning_time`.
 4. Current Inbox contents.
 5. If `seven_habits` is enabled: the current calendar year's goals
    artefact (`<goals.artefact_name> — <year>`; see quarterly-goal-setting)
-   — specifically this quarter's milestones — so today's big rock (step 6
-   below) and the completion check (step 3) can name a real milestone
-   instead of a generic description.
+   — this quarter's milestones AND their parent yearly goals, including
+   each yearly goal's `(grounded in: ...)` annotation when `ikigai` is
+   enabled — so today's big rock (step 6) and the completion check (step
+   3) can trace all the way to the long-term goal, not stop at the
+   milestone.
 
 ## Procedure
 
@@ -52,9 +54,12 @@ scheduled task fires at `review_cadence.daily_planning_time`.
    was overdue and got done): give a short, specific acknowledgment — name
    the actual task, not a generic "great job." If it traces back to a
    current-quarter milestone from the goals artefact (input 5), say which
-   one and why it matters, rather than treating all completions the same.
-   Skip this step quietly if there's nothing worth calling out — don't
-   manufacture praise for routine items just to fill the step.
+   one and why it matters — and if that milestone's yearly goal is itself
+   grounded in a long-term goal, name that too, not just the milestone.
+   That's the difference between "you finished a task" and "this moved
+   your actual long-term direction forward." Skip this step quietly if
+   there's nothing worth calling out — don't manufacture praise for
+   routine items just to fill the step.
 
 4. **Quick Inbox skim** (if `gtd` enabled). Not a full triage — that's
    weekly review's job. Just check whether anything in Inbox is urgent
@@ -69,9 +74,12 @@ scheduled task fires at `review_cadence.daily_planning_time`.
 6. **If `seven_habits` enabled**: make sure at least one "big rock"
    (important-not-urgent, Quadrant II) is on the list, tied to a specific
    current-quarter milestone from the goals artefact — not just described
-   generically as "goal-related." If nothing in today's or this week's
-   items traces back to an active milestone, say so rather than picking
-   an arbitrary task to label as the big rock.
+   generically as "goal-related." When that milestone's yearly goal is
+   grounded in a long-term goal, name that connection too, so the big
+   rock reads as serving real long-term direction, not just this
+   quarter's list. If nothing in today's or this week's items traces back
+   to an active milestone, say so rather than picking an arbitrary task
+   to label as the big rock.
 
 7. **If `atomic_habits` enabled**: include the day's recurring habit-todos
    automatically, don't make the user re-add them.

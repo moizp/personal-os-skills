@@ -30,8 +30,10 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
    next week.
 5. The current calendar year's goals artefact
    (`<goals.artefact_name> — <year>`; see quarterly-goal-setting) —
-   specifically this quarter's milestones and their parent yearly goals,
-   for alignment checking and for step 2's encouragement.
+   this quarter's milestones and their parent yearly goals, including
+   each yearly goal's `(grounded in: ...)` annotation when `ikigai` is
+   enabled, for alignment checking and for step 2's encouragement to
+   trace all the way to the long-term goal, not stop at the yearly goal.
 
 ## Procedure
 
@@ -47,11 +49,13 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
    didn't happen (that's step 3's job) — but for what DID get done, be
    specific and genuine: name the actual accomplishment, and if it traces
    back to a current-quarter milestone or yearly goal (input 5), say which
-   one and why it moved things forward. This isn't a courtesy line —
-   completions tied to a real goal deserve to be called out as such, not
-   folded anonymously into "here's what got done this week." Skip
-   generic praise for routine items; this is about real progress, not
-   participation credit.
+   one and why it moved things forward — and if that yearly goal is
+   itself grounded in a long-term goal, name that connection too. That's
+   the fullest version of "why it matters," not an optional extra. This
+   isn't a courtesy line — completions tied to a real goal deserve to be
+   called out as such, not folded anonymously into "here's what got done
+   this week." Skip generic praise for routine items; this is about real
+   progress, not participation credit.
 
 3. **Reschedule what's incomplete.** From step 3's results, anything not
    completed — including items overdue from before this week, now visible
@@ -72,8 +76,8 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
 
 5. **Check alignment with quarterly milestones.** Flag anything due this
    week/month that doesn't trace back to a current quarterly milestone
-   (and, through it, a yearly goal) — ask if it should be added
-   intentionally or dropped.
+   (and, through it, a yearly goal, and — when `ikigai` is enabled — a
+   long-term goal) — ask if it should be added intentionally or dropped.
 
 6. **If `seven_habits` enabled**:
    - Check role balance — were any roles completely absent from this

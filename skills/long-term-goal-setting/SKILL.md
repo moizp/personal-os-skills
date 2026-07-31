@@ -30,14 +30,28 @@ ikigai only) or enable the missing framework(s) first.
 
 ## Inputs to read first
 1. `config/config.yaml` → `frameworks`, `goals.roles`,
-   `goals.long_term_artefact_name`
+   `goals.long_term_artefact_name`, `goals.artefact_name`
 2. The current long-term-goals artefact, if one exists — this is a
    revision, not a from-scratch exercise. Read what's there and what's
    changed since, don't ignore prior work.
+3. The current calendar year's quarterly-goals artefact
+   (`<goals.artefact_name> — <year>`), if one exists — used to check
+   which long-term goals actually have a yearly goal grounded in them
+   right now (see step 1 below).
 
 ## Procedure
 
-1. **Work through Ikigai per relevant role** (`goals.roles`). For each
+1. **Check for dormant long-term goals.** Skip this on a genuine first
+   run — nothing to compare against yet. Otherwise, for each `active`
+   long-term goal in the artefact, check whether the current year's
+   quarterly-goals artefact has any yearly goal grounded in it. If not,
+   don't let it sit silently marked "active" with no real progress behind
+   it — flag it explicitly and ask whether it's still a real priority
+   (and should get a yearly goal drafted against it via
+   `quarterly-goal-setting`), or whether it's genuinely gone stale and
+   should be marked retired.
+
+2. **Work through Ikigai per relevant role** (`goals.roles`). For each
    role, ask the four questions in turn — what do you love doing in this
    role, what are you actually good at (not just what you enjoy), what
    does this role need from you (family/employer/community/etc.), and
@@ -45,33 +59,41 @@ ikigai only) or enable the missing framework(s) first.
    indirectly. Don't skip a circle because it feels obvious — shallow
    answers here produce shallow long-term goals later.
 
-2. **Find the overlaps, and name the gaps.** A role with strong love and
+3. **Find the overlaps, and name the gaps.** A role with strong love and
    skill but no world-needs/paid-for grounding is a hobby, not a
    long-term commitment — fine if the user is explicit that's the intent,
    not fine if treated as equivalent to a fully-grounded match. Don't
    force every role into a tidy four-way overlap if it genuinely isn't
    there yet; a named gap is more useful than a manufactured one.
 
-3. **Draft one or two durable long-term goals per role**, each explicitly
+4. **Draft one or two durable long-term goals per role**, each explicitly
    tied to where it sits in that role's ikigai — not just restated as an
    ambition disconnected from the circles that produced it. These are
    multi-year in scope: bigger and slower than a yearly goal, not just
    "the yearly goal, but vaguer."
 
-4. **Do not manufacture a long-term goal for every role just for
+5. **Do not manufacture a long-term goal for every role just for
    symmetry.** If a role genuinely has no clear long-term direction yet,
    say so and leave it open — `quarterly-goal-setting` can still set
    yearly goals for that role without a long-term parent, it'll just flag
    them as not-yet-grounded (see that skill's alignment check).
 
-5. **Update the long-term-goals artefact**
+6. **Update the long-term-goals artefact**
    (`goals.long_term_artefact_name`) as a **persistent Project
    artefact** — not year-scoped, since this layer doesn't reset annually
    the way the quarterly-goals artefact does. Append a dated revision
    entry summarising what changed and why. Never delete a prior long-term
    goal outright — mark it achieved, retired, or superseded instead, so
-   the history of *why* direction changed stays visible. Use roughly this
-   shape (markdown, not a rigid schema — keep it human-editable):
+   the history of *why* direction changed stays visible.
+
+   Note: `quarterly-goal-setting` may also append a short revision-history
+   entry here on its own, when a yearly goal grounded in one of these
+   long-term goals gets fully achieved — that's expected, not a conflict;
+   it doesn't redraft the long-term goals themselves, only logs progress
+   against them.
+
+   Use roughly this shape (markdown, not a rigid schema — keep it
+   human-editable):
 
 ```
 # <goals.long_term_artefact_name>
