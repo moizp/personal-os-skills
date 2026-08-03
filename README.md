@@ -69,7 +69,8 @@ cp config/config.example.yaml config/config.yaml
 ```
 Edit `config/config.yaml`:
 - Which frameworks you're using (comment out ones you don't want)
-- Your Reminders list names (or your todo backend of choice)
+- Your todo backend of choice and its project/list names (Todoist by
+  default — see step 3)
 - Your goals artefact names — `goals.artefact_name` (the yearly/quarterly
   one, created fresh each calendar year) and, if using `ikigai`,
   `goals.long_term_artefact_name` (not year-scoped — see
