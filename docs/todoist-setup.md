@@ -10,11 +10,24 @@ available in that Project's chats.
 
 ## Real projects to create
 - **Inbox** — built-in, no setup needed (project id `"inbox"`).
-- **Someday/Maybe** (`todo_backend.connector.todoist.someday_maybe_project`)
-  — GTD Someday/Maybe. Create this as a real project yourself.
 
-Plus one project per active goal that needs multi-step tracking (see
-below) — created ad hoc, not up front.
+That's it up front. Someday/Maybe is deliberately **not** a project (see
+below) — this keeps a free-tier project slot open for an actual Kanban
+board. Project(s) per active goal get created ad hoc as needed (see
+below), not up front.
+
+## Someday/Maybe: a label, not a project
+GTD's Someday/Maybe is a *status*, not a place — so it's implemented as a
+label (`todo_backend.connector.todoist.someday_maybe_label`, default
+`"someday"`) rather than a dedicated project. An item stays wherever it
+already lives (usually Inbox, sometimes a project) and just gets the
+label added, typically with its due date cleared at the same time.
+
+**Important:** `update-tasks`' `labels` field **replaces the task's full
+label list**, it doesn't add to it. If a task already carries a
+`goal-`-prefixed label, include it in the same call alongside `"someday"`
+— don't overwrite it by passing `["someday"]` alone. Query everything
+currently parked with `find-tasks(labels: ["someday"])`.
 
 ## Time horizons — computed natively, no workaround needed
 Unlike Reminders (see `docs/reminders-setup.md` for why that needed a
@@ -56,7 +69,8 @@ Triaging means one of:
   an active goal
 - Give it a due date via `reschedule-tasks` if it's a real near-term
   action — no project move needed, it'll show up in horizon queries
-- Move to Someday/Maybe
+- Apply the `someday` label via `update-tasks` (remembering to preserve
+  any existing labels in the same call) and clear its due date
 - Delete
 - Do it immediately if it takes under two minutes (GTD's two-minute rule)
 

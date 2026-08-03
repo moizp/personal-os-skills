@@ -29,7 +29,7 @@ todo_backend:
   connector:
     name: "todoist"
     todoist:
-      someday_maybe_project: "Someday/Maybe"
+      someday_maybe_label: "someday"
       kanban_sections: ["Backlog", "Next", "Doing", "Done", "Archived"]
       label_prefix: "goal-"
   yjs:

@@ -29,9 +29,13 @@ todo_backend:
   connector:
     name: "todoist"
     todoist:
-      # Inbox is built-in (project id "inbox"). Someday/Maybe must be a
-      # real project you create yourself — see docs/todoist-setup.md.
-      someday_maybe_project: "Someday/Maybe"
+      # Inbox is built-in (project id "inbox"). Someday/Maybe is a LABEL,
+      # not a project — deliberately, to keep a free-tier project slot
+      # available for an actual Kanban board. Apply/remove this label via
+      # update-tasks; remember its `labels` field replaces the full list,
+      # so include any existing labels (e.g. a goal- link) in the same
+      # call, don't just pass ["someday"] alone.
+      someday_maybe_label: "someday"
       # Sections are real and scriptable via add-sections/find-sections —
       # unlike Reminders, a skill can create these itself for a new
       # project, not just read them.

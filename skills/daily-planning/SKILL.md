@@ -47,10 +47,11 @@ scheduled task fires at `review_cadence.daily_planning_time`.
 2. **Reschedule what's incomplete.** From step 2's results, anything
    overdue or already due today: ask whether it's still relevant, should
    stay due today, or should get a new due date (pushed out to a specific
-   day, or cleared back toward Someday/Maybe). Don't just silently carry
-   it forward with the same stale date — that's how a due date stops
-   meaning anything. Actually call `reschedule-tasks` once a decision is
-   made, don't just note the decision in chat.
+   day via `reschedule-tasks`, or genuinely parked — clear the due date
+   via `reschedule-tasks` AND apply the `someday` label via `update-tasks`,
+   preserving any existing labels in that same call). Don't just silently
+   carry it forward with the same stale date — that's how a due date
+   stops meaning anything.
 
 3. **Acknowledge what's already done.** From step 3's results, give a
    short, specific acknowledgment for each — name the actual task, not a

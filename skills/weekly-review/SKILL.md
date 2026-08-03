@@ -17,9 +17,10 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
 
 ## Inputs to read first
 1. `config/config.yaml` → `todo_backend`, `review_cadence`, `frameworks`
-2. Current Inbox and Someday/Maybe project contents, and any active
-   project Kanban boards — actually query them (`find-tasks`), don't
-   assume.
+2. Current Inbox contents (`find-tasks`, `projectId: "inbox"`),
+   everything currently marked Someday/Maybe (`find-tasks`,
+   `labels: [<someday_maybe_label>]`), and any active project Kanban
+   boards — actually query them, don't assume.
 3. **`find-tasks-by-date` with `startDate: "today"`, `daysCount: 7`** —
    this week's incomplete items, including anything overdue from before
    (overdue is included by default) — the raw material for the reschedule
@@ -74,10 +75,13 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
      blocked, no longer wanted, or needs to be broken into a smaller
      next action.
 
-4. **Someday/Maybe MUST be touched this step.** Per GTD, this project rots
+4. **Someday/Maybe MUST be touched this step.** Per GTD, this list rots
    if skipped. Surface it explicitly: "here's what's in Someday/Maybe —
    anything ready to activate, or still parked?" Don't skip this even if
-   it looks unchanged from last week.
+   it looks unchanged from last week. "Activating" an item means removing
+   the `someday` label and giving it a real due date or project — remove
+   the label in the same `update-tasks` call, don't leave it labeled
+   `someday` alongside a due date, that's a contradictory state.
 
 5. **Check alignment with quarterly milestones.** Flag anything due this
    week/month that doesn't trace back to a current quarterly milestone
