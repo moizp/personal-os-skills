@@ -25,18 +25,16 @@ goals:
     - "Personal Growth"
 
 todo_backend:
-  type: "reminders"
-  reminders:
-    lists:
-      inbox: "Inbox"
-      someday_maybe: "Someday/Maybe"
-    kanban_sections: ["Backlog", "Next", "Doing", "Done", "Archived"]
-    tag_prefix: "#goal-"
+  type: "connector"
+  connector:
+    name: "todoist"
+    todoist:
+      someday_maybe_project: "Someday/Maybe"
+      kanban_sections: ["Backlog", "Next", "Doing", "Done", "Archived"]
+      label_prefix: "goal-"
   yjs:
     relay_url: ""
     default_room: ""
-  connector:
-    name: ""
 
 review_cadence:
   daily_planning_time: "07:30"
@@ -45,8 +43,8 @@ review_cadence:
   quarterly_review: "last week of each quarter"
 
 notes: >
-  Project boards in Reminders are per-goal, not per-list — each active
-  quarterly goal that needs multi-step tracking gets its own Reminders list
-  with Kanban sections. Due dates drive which Smart List (Today/This Week)
-  a task shows up in; moving a Kanban card should update the due date to
-  match.
+  Project boards are per-goal, not per-project-in-general — each active
+  quarterly goal that needs multi-step tracking gets its own Todoist
+  project with Kanban sections. Sections track workflow status; due dates
+  track the actual deadline — the two are independent, don't force one to
+  match the other.

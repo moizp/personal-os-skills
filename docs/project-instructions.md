@@ -24,8 +24,8 @@ When I break a goal into weekly deliverables, run it through GTD's
 clarify step first — what's the actual next action, and is this a
 project (multiple actions) or a single next action?
 
-My todo backend is: [Reminders / Yjs app / connector name].
-My personal room ID / list names are: [fill in — or reference config].
+My todo backend is: [Todoist / Reminders / Yjs app / connector name].
+My project/list names are: [fill in — or reference config].
 
 Habit-based recurring goals should reference the four laws of behaviour
 change (obvious/attractive/easy/satisfying) when troubleshooting misses,

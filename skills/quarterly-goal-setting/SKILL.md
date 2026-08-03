@@ -163,9 +163,12 @@ history lives in the prior year's artefact, not duplicated here.)
    - Flagged as either a recurring-habit goal (if `atomic_habits` enabled
      and it's identity-based/recurring) or a discrete project milestone
 
-5. **For each discrete project milestone**, note that it will need its
-   own todo-list/Kanban board (see the todo backend doc) — don't leave it
-   as a single vague line item.
+5. **For each discrete project milestone**, it needs its own Kanban
+   board — create the Todoist project and its sections directly
+   (`add-projects`, then `add-sections` matching
+   `todo_backend.connector.todoist.kanban_sections`; see
+   `docs/todoist-setup.md`) rather than just noting that it'll need one.
+   Don't leave it as a single vague line item.
 
 6. **If `gtd` is enabled**: confirm each project milestone has at least
    one concrete next action, not just an outcome statement.

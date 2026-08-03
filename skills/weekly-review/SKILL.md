@@ -17,18 +17,22 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
 
 ## Inputs to read first
 1. `config/config.yaml` → `todo_backend`, `review_cadence`, `frameworks`
-2. Current Inbox and Someday/Maybe list contents, and any active project Kanban
-   boards — actually query them, don't assume.
-3. **`get_due_todos(horizon: this_week, includeCompleted: true)`** — this
-   is "This Week," not a named list (Smart Lists aren't scriptable; see
-   `docs/reminders-setup.md`). A horizon has no lower bound, so this
-   includes anything overdue from before this week too, whether completed
-   or not — that's the raw material for both the completion check (step 2)
-   and the reschedule check (step 3). `includeCompleted: true` here
-   specifically, so completions can be reviewed against what was planned.
-4. **`get_due_todos(horizon: this_month)`** — candidates to stage into
-   next week.
-5. The current calendar year's goals artefact
+2. Current Inbox and Someday/Maybe project contents, and any active
+   project Kanban boards — actually query them (`find-tasks`), don't
+   assume.
+3. **`find-tasks-by-date` with `startDate: "today"`, `daysCount: 7`** —
+   this week's incomplete items, including anything overdue from before
+   (overdue is included by default) — the raw material for the reschedule
+   check (step 3).
+4. **`find-completed-tasks` with `getBy: "completion"`, `since`/`until`
+   spanning the past week** — what was actually completed, compared
+   against what was planned, for the credit check (step 2). Separate tool
+   from step 3's query — Todoist splits active/completed queries rather
+   than a combined "include completed" flag.
+5. **`find-tasks-by-date` with `startDate: "today", daysCount: 30`** (or a
+   raw `filter` string on `find-tasks` for a longer horizon) — candidates
+   to stage into next week.
+6. The current calendar year's goals artefact
    (`<goals.artefact_name> — <year>`; see quarterly-goal-setting) —
    this quarter's milestones and their parent yearly goals, including
    each yearly goal's `(grounded in: ...)` annotation when `ikigai` is
@@ -37,18 +41,19 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
 
 ## Procedure
 
-1. **Inbox triage** (if `gtd` enabled). Read the real Inbox list. For
-   every item: move it to a project list, give it a due date (this makes
-   it show up in future `get_due_todos` horizon queries — no list move
-   needed), move it to Someday/Maybe, or flag it for deletion — nothing should
-   survive this step still sitting in Inbox untouched. If it takes under
-   two minutes, note it could just be done now rather than filed.
+1. **Inbox triage** (if `gtd` enabled). Read the real Inbox project. For
+   every item: move it to a project (`update-tasks`, change `projectId`),
+   give it a due date (this makes it show up in future
+   `find-tasks-by-date` queries — no project move needed), move it to
+   Someday/Maybe, or flag it for deletion — nothing should survive this
+   step still sitting in Inbox untouched. If it takes under two minutes,
+   note it could just be done now rather than filed.
 
-2. **Review completions — and give real credit.** Compare step 3's
-   results against what was actually planned. No judgment tone for what
+2. **Review completions — and give real credit.** From step 4's results,
+   compare against what was actually planned. No judgment tone for what
    didn't happen (that's step 3's job) — but for what DID get done, be
    specific and genuine: name the actual accomplishment, and if it traces
-   back to a current-quarter milestone or yearly goal (input 5), say which
+   back to a current-quarter milestone or yearly goal (input 6), say which
    one and why it moved things forward — and if that yearly goal is
    itself grounded in a long-term goal, name that connection too. That's
    the fullest version of "why it matters," not an optional extra. This
@@ -58,21 +63,21 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
    progress, not participation credit.
 
 3. **Reschedule what's incomplete.** From step 3's results, anything not
-   completed — including items overdue from before this week, now visible
-   because horizons have no lower bound — needs an actual decision, not a
-   silent carry-forward with the same stale due date:
+   completed — including items overdue from before this week — needs an
+   actual decision, not a silent carry-forward with the same stale due
+   date:
    - Still relevant and realistic → set a specific new due date via
-     `update_due_date`.
+     `reschedule-tasks`.
    - Not urgent → move toward Someday/Maybe.
    - Been slipping for multiple weeks running → say so explicitly rather
      than rescheduling it again on autopilot; ask whether it's genuinely
      blocked, no longer wanted, or needs to be broken into a smaller
      next action.
 
-4. **Someday/Maybe MUST be touched this step.** Per GTD, this list rots if
-   skipped. Surface it explicitly: "here's what's in Someday/Maybe — anything
-   ready to activate, or still parked?" Don't skip this even if the list
-   looks unchanged from last week.
+4. **Someday/Maybe MUST be touched this step.** Per GTD, this project rots
+   if skipped. Surface it explicitly: "here's what's in Someday/Maybe —
+   anything ready to activate, or still parked?" Don't skip this even if
+   it looks unchanged from last week.
 
 5. **Check alignment with quarterly milestones.** Flag anything due this
    week/month that doesn't trace back to a current quarterly milestone
@@ -109,19 +114,17 @@ a Cowork scheduled task fires at `review_cadence.weekly_review_day` +
    treat it as a missed task. Flag any experiment that ran past its
    timebox without a recorded outcome.
 
-10. **Stage next week.** From `get_due_todos(horizon: this_month)` and
-    project Backlog/Next columns, pick what's realistic for next week and
-    set/update due dates accordingly via `update_due_date` — this is what
-    "staging" means now, since there's no This Week list to move items
-    into. Keep it realistic, not aspirational. Distinct from step 3: this
-    is newly committed work, not something that already slipped.
+10. **Stage next week.** From step 5's results and project Backlog/Next
+    sections, pick what's realistic for next week and set/update due
+    dates accordingly via `reschedule-tasks`. Keep it realistic, not
+    aspirational. Distinct from step 3: this is newly committed work, not
+    something that already slipped.
 
-11. **Check Kanban boards for missing due dates**: for any project list
-    using Kanban sections, flag "Doing" items with no due date set at
-    all — those are invisible to `get_due_todos`. Don't force the due
-    date to match the column name; the column is workflow status, the
-    due date is the actual deadline, and they're independent (see
-    `docs/reminders-setup.md`).
+11. **Check Kanban boards for missing due dates**: for any project using
+    Kanban sections, flag "Doing" items with no due date set at all —
+    those are invisible to `find-tasks-by-date`. Don't force the due date
+    to match the section name; the section is workflow status, the due
+    date is the actual deadline, and they're independent.
 
 ## Output
 A short summary: real credit for what got done (tied to goals where it

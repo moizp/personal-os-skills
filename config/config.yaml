@@ -21,31 +21,37 @@ goals:
   artefact_name: "quarterly-goals"   # name of the Claude artefact / tracker
   long_term_artefact_name: "long-term-goals"   # see long-term-goal-setting; not year-scoped
   # If goals should map to Covey "roles," list them here (optional)
-  roles: ["Colleague", "Leader", "Parent", "Community Member"]
+  roles: ["Colleague", "Leader", "Parent", "Community Member", "Author", "Friend"]
 
 todo_backend:
-  type: "reminders"            # one of: reminders | yjs | connector
-  # --- reminders-specific ---
+  type: "connector"            # one of: reminders | yjs | connector
+  # --- connector-specific (if todo_backend.type == connector) ---
+  connector:
+    name: "todoist"
+    todoist:
+      # Inbox is built-in (project id "inbox"). Someday/Maybe must be a
+      # real project you create yourself — see docs/todoist-setup.md.
+      someday_maybe_project: "Someday/Maybe"
+      # Sections are real and scriptable via add-sections/find-sections —
+      # unlike Reminders, a skill can create these itself for a new
+      # project, not just read them.
+      kanban_sections: ["Backlog", "Next", "Doing", "Done", "Archived"]
+      label_prefix: "goal-"    # native Todoist labels, e.g. "goal-launch-x"
+  # --- reminders-specific (kept for reference/forkability — see
+  # docs/reminders-setup.md and README's "Lessons learned" section for why
+  # this isn't the active backend: it works, but Reminders' AppleScript/JXA
+  # bridge has a large per-list overhead that made get_due_todos-style
+  # queries unreliably slow once past a handful of lists) ---
   reminders:
-    # Only REAL Reminders lists go here — Today/This Week/etc. are Smart
-    # Lists, not scriptable. Time horizons are computed by get_due_todos.
     lists:
       inbox: "Inbox"
-      # A REAL list, distinct from the "Later" custom Smart List (which
-      # filters no-due-date reminders and is invisible to AppleScript/JXA
-      # like any Smart List — see reminders-mcp-server/docs/limitations.md).
       someday_maybe: "Someday/Maybe"
-    # project lists are created ad hoc, one per active project/goal,
-    # with Kanban sections — see docs/reminders-setup.md
     kanban_sections: ["Backlog", "Next", "Doing", "Done", "Archived"]
     tag_prefix: "#goal-"       # tags used to link tasks back to a quarterly goal
   # --- yjs-specific (if todo_backend.type == yjs) ---
   yjs:
     relay_url: ""
     default_room: ""           # your personal room ID
-  # --- connector-specific (if todo_backend.type == connector) ---
-  connector:
-    name: ""                   # e.g. "todoist"
 
 review_cadence:
   daily_planning_time: "07:30"

@@ -43,7 +43,8 @@ personal-os-skills/
 │   ├── config.example.yaml    ← template — copy this
 │   └── config.sample.yaml     ← a filled-in real example (see docs/sample-config-notes.md)
 └── docs/
-    ├── reminders-setup.md     ← Apple Reminders list/tag/kanban setup
+    ├── todoist-setup.md       ← Todoist project/label/kanban setup (default backend)
+    ├── reminders-setup.md     ← Apple Reminders list/tag/kanban setup (alternative)
     └── sample-config-notes.md ← walkthrough of the sample config
 ```
 
@@ -79,12 +80,17 @@ Look at `config/config.sample.yaml` for a real filled-in example.
 
 ### 3. Set up your todo backend
 Pick one and follow its doc:
+- **Todoist (recommended)** → `docs/todoist-setup.md` (projects, sections,
+  labels). Connect via Settings → Connectors in claude.ai/Desktop — no
+  local server, works from any device. See "Lessons learned" below for
+  why this is the default over Reminders.
 - **Apple Reminders** → `docs/reminders-setup.md` (lists, tags, Kanban sections) +
   [`reminders-mcp-server`](https://github.com/amoizp/reminders-mcp-server)
-  for Claude to read/write directly (macOS only, local execution)
+  for Claude to read/write directly (macOS only, local execution) — works,
+  but read the "Lessons learned" section before choosing this over Todoist.
 - **Custom Yjs/CRDT app** → see the companion repo (link it here once built)
-- **Third-party app (Todoist/Asana/etc.)** → connect it via Claude's connector
-  directory; no extra setup needed in this repo
+- **Other third-party app (Asana, etc.)** → connect via Claude's connector
+  directory if one exists; no extra setup needed in this repo
 
 ### 4. Create your Claude Project
 1. Create a new Project in Claude (e.g. "Personal OS")
@@ -111,6 +117,69 @@ what the check-in should actually say.
 - Reminders/Shortcuts: sync automatically via iCloud, nothing to do
 - Claude Project + Cowork: account-level, sign in on the new device
 - This repo: `git pull` on the new machine, re-point Skills settings at it
+
+---
+
+## Lessons learned: why Todoist over Apple Reminders
+
+This system originally ran on Apple Reminders, via a companion local MCP
+server (`reminders-mcp-server`) that shelled out to AppleScript/JXA. It's
+still a supported option (`docs/reminders-setup.md`), but it's no longer
+the default — here's why, in case you're weighing the same choice.
+
+**What worked with Reminders:**
+- Full read/write control via JXA — listing, creating, completing tasks,
+  setting due dates, all scriptable.
+- Two real bugs got found and fixed along the way: `get_due_todos`
+  originally excluded anything overdue (its date filter had a lower bound
+  that should never have been there), and date-only due dates were
+  landing at an arbitrary time instead of showing as all-day — both fixed
+  by understanding exactly how AppleScript/JXA represents dates.
+- These fixes proved the *logic* could be made correct.
+
+**What didn't work — and turned out to be unfixable at the script level:**
+- Reminders' AppleScript/JXA bridge has a large, roughly fixed overhead
+  per list touched — empirically 2–7 seconds, regardless of how many
+  reminders that list actually contains. A single list in isolation was
+  fast; scanning multiple lists (needed for any "what's due today across
+  everything" query) was not.
+- Three different fix attempts were tried: sequential scanning (slow but
+  predictable, ~1-7 minutes across a dozen lists), unlimited concurrent
+  fan-out (catastrophically worse — up to 7 minutes for the same query,
+  apparently due to Reminders' Apple Events handling degrading badly
+  under concurrent load rather than serving requests in parallel), and
+  concurrency-capped batching (still unreliable — a configuration that
+  measured 4 seconds in isolation took 5+ minutes once integrated into
+  real usage). None produced consistent, predictable performance — the
+  bottleneck appears to be inside Reminders.app's own scripting bridge,
+  not something a client-side script can reliably engineer around.
+- Kanban sections (the columns behind quarterly-goal-setting's project
+  boards) are not exposed to AppleScript/JXA at all — a permanent
+  limitation, not a performance problem. `update_due_date` existed
+  specifically as a workaround for this.
+- No native tag/label support in the scripting bridge — the `#goal-`
+  prefix convention was a naming-only workaround, not a real feature.
+
+**Why Todoist, specifically:**
+- An official Claude connector already existed — no server to build or
+  keep running locally, no macOS-only constraint, works from any device.
+- Verified live: instant responses (not the multi-minute waits above),
+  correct overdue-inclusion by default (`find-tasks-by-date` does this
+  natively — the exact behaviour that took real engineering effort to
+  retrofit onto Reminders), and genuine date-only due dates with no
+  workaround needed.
+- Real, scriptable Kanban sections (`add-sections`/`find-sections`) —
+  the permanent Reminders limitation, solved rather than worked around.
+- Native labels and priority levels, replacing the `#goal-` naming hack
+  entirely.
+- Bonus tools that didn't exist before at all: project health/productivity
+  analytics that weekly-review and quarterly-goal-setting can now draw on.
+
+The honest summary: Reminders' local, no-cloud-dependency model is
+appealing, and everything it does, it does *correctly* once you
+understand its scripting quirks — the problem was purely that "correct"
+and "fast enough to use" turned out to be different bars, and only one
+of them was reachable from outside the app.
 
 ---
 

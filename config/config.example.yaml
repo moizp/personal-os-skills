@@ -30,15 +30,33 @@ goals:
   roles: []                    # e.g. ["Parent", "Engineer", "Health", "Community"]
 
 todo_backend:
-  type: "reminders"            # one of: reminders | yjs | connector
-  # --- reminders-specific ---
+  type: "connector"            # one of: reminders | yjs | connector
+  # --- connector-specific (if todo_backend.type == connector) ---
+  # Recommended default — see docs/todoist-setup.md and README's "Lessons
+  # learned" section. Uses Claude's official Todoist connector (Settings →
+  # Connectors), so there's no local server to run and no macOS-only
+  # constraint, unlike the reminders option below.
+  connector:
+    name: "todoist"
+    todoist:
+      # Inbox is built-in (project id "inbox"). Someday/Maybe must be a
+      # real project you create yourself.
+      someday_maybe_project: "Someday/Maybe"
+      # Sections are real and scriptable (add-sections/find-sections) —
+      # a skill can create these itself for a new project, not just read
+      # them, unlike the Reminders option below.
+      kanban_sections: ["Backlog", "Next", "Doing", "Done", "Archived"]
+      label_prefix: "goal-"    # native Todoist labels, e.g. "goal-launch-x"
+  # --- reminders-specific (alternative option — see docs/reminders-setup.md.
+  # Works, but has a real limitation worth knowing before choosing it: the
+  # AppleScript/JXA bridge has a large, roughly fixed per-list overhead
+  # (seconds, not milliseconds) that made horizon-style queries (get_due_todos)
+  # unreliably slow once past a handful of lists — see README's "Lessons
+  # learned" section for the full story before picking this over Todoist.) ---
   reminders:
     # Only REAL Reminders lists go here. "Today"/"This Week"/"This
     # Month"/"This Quarter" are NOT real lists — they're Smart Lists
     # (computed views) and aren't readable/writable via AppleScript/JXA.
-    # Time horizons are computed instead, via the get_due_todos tool
-    # (horizon: today | this_week | this_month | this_quarter) — see
-    # docs/reminders-setup.md.
     lists:
       inbox: "Inbox"
       # A REAL list — must not share a name with any Smart List you've
@@ -49,23 +67,14 @@ todo_backend:
     # top-level list — NOT inside a Reminders "Group" (folder). Groups
     # are also invisible to AppleScript/JXA. Use a naming prefix instead
     # if you want visual organisation, e.g. "Work — Launch X".
-    # project lists are created ad hoc, one per active project/goal,
-    # with Kanban sections — see docs/reminders-setup.md.
-    # NOTE: reminders-mcp-server cannot read/write sections (AppleScript
-    # limitation) — this list is for the one-time manual setup only, not
-    # something a skill can pass to add_todo.
+    # NOTE: Kanban sections are not scriptable at all here (AppleScript
+    # limitation) — this list is for one-time manual setup only.
     kanban_sections: ["Backlog", "Next", "Doing", "Done", "Archived"]
-    # NOTE: reminders-mcp-server does not currently support tags — no tool
-    # can read or set them. This field is aspirational until tag support
-    # is added to the server; don't rely on it in skills yet.
     tag_prefix: "#goal-"       # tags used to link tasks back to a quarterly goal
   # --- yjs-specific (if todo_backend.type == yjs) ---
   yjs:
     relay_url: ""
     default_room: ""           # your personal room ID
-  # --- connector-specific (if todo_backend.type == connector) ---
-  connector:
-    name: ""                   # e.g. "todoist"
 
 review_cadence:
   daily_planning_time: "07:30"

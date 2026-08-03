@@ -16,16 +16,20 @@ scheduled task fires at `review_cadence.daily_planning_time`.
 
 ## Inputs to read first
 1. `config/config.yaml` → `todo_backend`, `review_cadence`
-2. **Query `get_due_todos` with `horizon: today` and `includeCompleted:
-   true`** — this is "Today," not a named list (Today is a Smart List,
-   not scriptable; see `docs/reminders-setup.md`). A horizon has no lower
-   bound, so this also returns everything overdue from before, whether
-   completed or not — that's what makes both the carryover check (step 2)
-   and the completion check (step 3) possible from one query.
-3. **Query `get_due_todos` with `horizon: this_week`** — candidates that
-   could be pulled into today.
-4. Current Inbox contents.
-5. If `seven_habits` is enabled: the current calendar year's goals
+2. **`find-tasks-by-date` with `startDate: "today"`** — this is "Today."
+   The tool includes overdue items by default
+   (`overdueOption: "include-overdue"`), so this alone covers the
+   reschedule check (step 2) — no separate query needed for carryover.
+3. **`find-completed-tasks` with `getBy: "completion"`, `since`/`until`
+   spanning since the last check-in (typically yesterday through now)**
+   — what actually got finished, for the credit check (step 3). This is
+   a separate tool from `find-tasks-by-date` because Todoist queries
+   active and completed tasks differently — there's no combined
+   "include completed" flag on the date-range tool.
+4. **`find-tasks-by-date` with `startDate: "today"`, `daysCount: 7`** —
+   candidates that could be pulled into today from later this week.
+5. Current Inbox contents — `find-tasks` with `projectId: "inbox"`.
+6. If `seven_habits` is enabled: the current calendar year's goals
    artefact (`<goals.artefact_name> — <year>`; see quarterly-goal-setting)
    — this quarter's milestones AND their parent yearly goals, including
    each yearly goal's `(grounded in: ...)` annotation when `ikigai` is
@@ -37,36 +41,34 @@ scheduled task fires at `review_cadence.daily_planning_time`.
 
 1. **Never invent priorities from scratch.** Today's plan is built from
    the incomplete items in step 2's query, plus candidates pulled forward
-   from `get_due_todos(horizon: this_week)` if today looks light. If this
-   week's query is empty too, say so rather than guessing at what matters.
+   from step 4 if today looks light. If step 4 is empty too, say so
+   rather than guessing at what matters.
 
-2. **Reschedule what's incomplete.** From step 2's results, anything not
-   completed that's overdue or was already due today: ask whether it's
-   still relevant, should stay due today, or should get a new due date
-   (pushed out to a specific day, or cleared back toward Someday/Maybe).
-   Don't just silently carry it forward with the same stale date — that's
-   how a due date stops meaning anything. Actually call `update_due_date`
-   once a decision is made (see step 8), don't just note the decision in
-   chat.
+2. **Reschedule what's incomplete.** From step 2's results, anything
+   overdue or already due today: ask whether it's still relevant, should
+   stay due today, or should get a new due date (pushed out to a specific
+   day, or cleared back toward Someday/Maybe). Don't just silently carry
+   it forward with the same stale date — that's how a due date stops
+   meaning anything. Actually call `reschedule-tasks` once a decision is
+   made, don't just note the decision in chat.
 
-3. **Acknowledge what's already done.** From step 2's results, anything
-   completed (finished since the last check-in, including anything that
-   was overdue and got done): give a short, specific acknowledgment — name
-   the actual task, not a generic "great job." If it traces back to a
-   current-quarter milestone from the goals artefact (input 5), say which
-   one and why it matters — and if that milestone's yearly goal is itself
-   grounded in a long-term goal, name that too, not just the milestone.
-   That's the difference between "you finished a task" and "this moved
-   your actual long-term direction forward." Skip this step quietly if
-   there's nothing worth calling out — don't manufacture praise for
-   routine items just to fill the step.
+3. **Acknowledge what's already done.** From step 3's results, give a
+   short, specific acknowledgment for each — name the actual task, not a
+   generic "great job." If it traces back to a current-quarter milestone
+   from the goals artefact (input 6), say which one and why it matters —
+   and if that milestone's yearly goal is itself grounded in a long-term
+   goal, name that too, not just the milestone. That's the difference
+   between "you finished a task" and "this moved your actual long-term
+   direction forward." Skip this step quietly if there's nothing worth
+   calling out — don't manufacture praise for routine items just to fill
+   the step.
 
 4. **Quick Inbox skim** (if `gtd` enabled). Not a full triage — that's
    weekly review's job. Just check whether anything in Inbox is urgent
    enough to need a due date of today; leave the rest for the weekly pass.
 
 5. **Keep Today small.** This is the most common failure mode across
-   real-world GTD/Reminders setups — Today becomes a dumping ground and
+   real-world GTD/task-app setups — Today becomes a dumping ground and
    loses meaning. Cap it to what's realistically doable; if there's more
    candidate work than fits, leave the due date as later-this-week rather
    than pulling everything to today.
@@ -90,9 +92,10 @@ scheduled task fires at `review_cadence.daily_planning_time`.
    timebox deadline and surface it if today is the deadline.
 
 9. **Update the todo backend**: for anything being pulled into today, or
-   rescheduled per step 2, set its due date via `update_due_date` (or
-   `dueDate` on `add_todo` for new items) — this is what makes it show up
-   correctly in tomorrow's query, since there's no list to move it into.
+   rescheduled per step 2, set its due date via `reschedule-tasks` (or
+   `dueString` on `add-tasks` for new items) — date-only (`YYYY-MM-DD`)
+   unless the user gave an explicit time, which shows as an all-day item
+   with no time badge.
 
 ## Output
 A short, concrete Today list (not a re-explanation of the whole week),

@@ -1,5 +1,13 @@
 # Apple Reminders Setup
 
+> **Status: alternative backend, not the default.** This system now
+> defaults to Todoist (`docs/todoist-setup.md`) after real-world testing
+> found Reminders' AppleScript/JXA bridge too slow for reliable use —
+> see README's "Lessons learned" section for the full story. Everything
+> below still works and is kept for anyone who'd rather use Reminders
+> (e.g. a small number of lists, where the per-list overhead described in
+> Lessons Learned matters less), or for reference.
+
 ## Real lists to create
 **Important: every list below must be top-level, not inside a Reminders
 "Group" (folder).** Groups are invisible to AppleScript/JXA — confirmed
