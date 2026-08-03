@@ -25,7 +25,10 @@ clarify step first — what's the actual next action, and is this a
 project (multiple actions) or a single next action?
 
 My todo backend is: [Todoist / Reminders / Yjs app / connector name].
-My project/list names are: [fill in — or reference config].
+Project/list names aren't fixed — I create, rename, and archive them over
+time, and this doc won't be kept in sync with that. Look them up live
+(`find-projects` or equivalent) when you need one, don't assume from a
+previous chat or memorize a list here.
 
 Habit-based recurring goals should reference the four laws of behaviour
 change (obvious/attractive/easy/satisfying) when troubleshooting misses,
